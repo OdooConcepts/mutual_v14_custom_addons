@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!-- Template definition -->
+        <template id="custom_report_mutual_stock_return_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <style>
+                        #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #ccc;
+  color: black;
+}
+</style>
+
+                    <div class="page">
+                        <h1 align="center">Stock Return Sheet</h1>
+                        <br/>
+                        <br/>
+                        <div style="font-size:18px;width:900px;display:inline-block;">
+                            <span style="font-size:18px">
+                                <strong>Receipt No:</strong>
+                                <span t-esc="o.id"/>
+                                <br/>
+                                <strong>Date:</strong>
+                                <span t-esc="o.date"/>
+                            </span>
+                            <br/>
+                            <br/>
+                            <div style="border:2px solid grey; padding:10px;border-radius:10px;">
+                                <strong style="font-size:18px">Title:</strong>
+                                <br/>
+                                <span t-esc="o.title"/>
+                                <br/>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <table id="customers">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Bank Depart./Customer/Technician</th>
+                                    <th>Cs #</th>
+                                    <th>Requisition #</th>
+                                    <th>Reference</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.products" t-as="line">
+                                    <td>
+                                         <span t-esc="line_index+1"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.products.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.quantity"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.customer.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.cs_number"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.req_ref"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.ref_to"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div style="font-size:17px;text-decoration:overline;">
+                                            <span style="margin-top:5px; margin-left:70px;">
+                                                <strong>Inventory Officer</strong>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="font-size:17px;text-decoration:overline;">
+                                            <span style="margin-top:5px; margin-left:65px;">
+                                                <strong>Manager Services</strong>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="font-size:17px;text-decoration:overline;">
+                                            <span style="margin-top:5px; margin-left:65px;">
+                                                <strong>Accounts Department</strong>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="font-size:17px;text-decoration:overline;">
+                                            <span style="margin-top:5px; margin-left:65px;">
+                                                <strong>GM Services</strong>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="pull-right" style="font-size:17px;text-decoration:overline;">
+                            <span style="margin-top:5px; margin-right:104px;">
+                                <strong>CEO's Approval</strong>
+                            </span>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div style="font-size:16px;border:2px solid grey; padding:10px;border-radius:10px;width:80%;margin-top:50px">
+                            <strong>Total Products Summary</strong>
+                            <p t-if="o.cumm_product_new_data()">
+                                <b>New Products</b>
+                                <br/>
+                                <t t-foreach="o.cumm_product_new_data()" t-as="line">
+                                    <span t-esc="line.get('name')"/>:<span t-esc="line.get('quantity')"/>,
+                                </t>
+                            </p>
+                            <p t-if="o.cumm_product_used_data()">
+                                <b>Used Products</b>
+                                <br/>
+                                <t t-foreach="o.cumm_product_used_data()" t-as="line">
+                                    <span t-esc="line.get('name')"/>:<span t-esc="line.get('quantity')"/>,
+                                </t>
+                            </p>
+                            <p t-if="o.cumm_product_faulty_data()">
+                                <b>Faulty Products</b>
+                                <br/>
+                                <t t-foreach="o.cumm_product_faulty_data()" t-as="line">
+                                    <span t-esc="line.get('name')"/>:<span t-esc="line.get('quantity')"/>,
+                                </t>
+                            </p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+

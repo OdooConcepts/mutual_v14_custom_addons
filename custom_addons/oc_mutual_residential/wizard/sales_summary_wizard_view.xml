@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="oc_sales_summary_form" model="ir.ui.view">
+        <field name="name">Sales Summary</field>
+        <field name="model">wiz.sales.summary</field>
+        <field name="arch" type="xml">
+            <form string="Sales Summary Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="disco_criteria"/>
+                        <field name="only_new_sales"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_print_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_window_sales_summary" model="ir.actions.act_window">
+        <field name="name">Sales Summary</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wiz.sales.summary</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="oc_sales_summary_form"/>
+        <field name="target">new</field>
+    </record>
+    <menuitem
+            name="Sales Summary"
+            action="action_window_sales_summary"
+            id="menu_sales_summary_report"
+            sequence="110"
+            parent="sale.menu_sale_report">
+    </menuitem>
+</odoo>

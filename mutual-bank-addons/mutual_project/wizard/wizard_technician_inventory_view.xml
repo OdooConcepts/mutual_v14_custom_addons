@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form view for Technician Inventory Wizard -->
+        <record id="technician_inventory_form_view" model="ir.ui.view">
+            <field name="name">view.form.technician.inventory</field>
+            <field name="model">wiz.technician.inventory</field>
+            <field name="arch" type="xml">
+                <form string="Technician Stock Report">
+                    <group>
+                        <field name="partner_id" domain="[('is_technician','=',True)]"/>
+                        <field name="all_rec"/>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Technician Inventory Wizard -->
+        <record id="action_technician_inventory_wizard" model="ir.actions.act_window">
+            <field name="name">Technician Stock Report</field>
+            <field name="res_model">wiz.technician.inventory</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="technician_inventory_form_view"/>
+        </record>
+
+         <menuitem
+                name="Technician Inventory"
+                action="action_technician_inventory_wizard"
+                id="menu_technician_inventory_project_attachment_view"
+                sequence="2"
+                parent="helpdesk.helpdesk_ticket_report_menu_main"/>
+    </data>
+</odoo>

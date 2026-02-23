@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seq_ad_requisition" model="ir.sequence">
+            <field name="name">Additional Slip</field>
+            <field name="code">mutual.ad.requisition</field>
+            <field name="padding">5</field>
+            <field name="prefix">AD</field>
+        </record>
+        <record id="seq_ni_requisition" model="ir.sequence">
+            <field name="name">New Installation Slip</field>
+            <field name="code">mutual.ni.requisition</field>
+            <field name="padding">5</field>
+            <field name="prefix">NI</field>
+        </record>
+    </data>
+</odoo>

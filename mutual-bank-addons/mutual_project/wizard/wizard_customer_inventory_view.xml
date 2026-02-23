@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form view for Customer Inventory Wizard -->
+        <record id="customer_form_wiz_inventory" model="ir.ui.view">
+            <field name="name">view.form.customer.inventory</field>
+            <field name="model">wiz.customer.inventory</field>
+            <field name="arch" type="xml">
+                <form string="Customer Stock Report">
+                    <group>
+                        <field name="partner_id"/>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Customer Inventory Wizard -->
+        <record id="action_customer_form_wiz_inventory" model="ir.actions.act_window">
+            <field name="name">Customer Stock Report</field>
+            <field name="res_model">wiz.customer.inventory</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="customer_form_wiz_inventory"/>
+        </record>
+
+         <menuitem
+                name="Customer Inventory"
+                action="action_customer_form_wiz_inventory"
+                id="menu_customer_inventory"
+                sequence="1"
+                parent="helpdesk.helpdesk_ticket_report_menu_main"/>
+    </data>
+</odoo>

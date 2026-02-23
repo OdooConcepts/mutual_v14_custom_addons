@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	    <record model="ir.module.category" id="oc_message_conf">
+			<field name="name">SMS Configuration</field>
+			<field name="description">Group for SMS Integration Module</field>
+			<field name="sequence">24</field>
+		</record>
+		<record id="oc_sms_api_sms" model="res.groups">
+			<field name="name">User</field>
+			<field name="category_id" ref="oc_ufone_sms_api_integration.oc_message_conf" />
+		</record>
+        <record id="oc_sms_api_admin" model="res.groups">
+            <field name="name">Admin</field>
+			<field name="category_id" ref="oc_ufone_sms_api_integration.oc_message_conf" />
+        </record>
+
+		<record id="oc_sms_api_sms_page" model="res.groups">
+            <field name="name">Sms Page</field>
+			<field name="category_id" ref="oc_ufone_sms_api_integration.oc_message_conf" />
+        </record>
+
+    </data>
+</odoo>

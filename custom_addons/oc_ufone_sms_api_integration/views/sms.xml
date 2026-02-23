@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_main_sms" name="SMS Configurations" parent="base.menu_custom" sequence="4"/>
+
+        <record id="action_sms_integration" model="ir.actions.act_window">
+            <field name="name">SMS Settings</field>
+            <field name="res_model">sms.integration</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_setting_sms"
+                  action="action_sms_integration"
+                  name="Settings"
+                  parent="oc_ufone_sms_api_integration.menu_main_sms" sequence="1"/>
+
+        <record id="view_sms_config" model="ir.ui.view">
+            <field name="name">view.sms.config</field>
+            <field name="model">sms.integration</field>
+            <field name="priority">5</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Test &amp; Confirm" type="object" name="smsSent"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet string="SMS Configuration">
+                        <group>
+                            <group>
+                                <field name="provider"/>
+                            </group>
+                            <group>
+
+                            </group>
+                            <group>
+                                <field name="customer_id" required="1" placeholder="e.g 0345xxxxxxx"/>
+                            </group>
+                            <group>
+                                <field name="password" password="True" required="1"/>
+                            </group>
+                            <group>
+                                <field name="url_api" required="1"/>
+                                <field name="mask" placeholder="MUTUAL" required="1"/>
+                                <field name="message_type" attrs="{'required':[('provider','=','ufone')],'invisible':[('provider','=','jazz')]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="number" required="1"/>
+                            <field name="message" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_sms_config_tree" model="ir.ui.view">
+            <field name="name">view.sms.config.tree</field>
+            <field name="model">sms.integration</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="number"/>
+                    <field name="password" password="True"/>
+                </tree>
+            </field>
+        </record>
+        <!-- setting -->
+
+        <!-- SMS -->
+        <record id="action_sms" model="ir.actions.act_window">
+            <field name="name">Messages</field>
+            <field name="res_model">oc.sms</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_sms"
+                  action="action_sms"
+                  name="Messages"
+                  parent="oc_ufone_sms_api_integration.menu_main_sms"
+                  sequence="2"/>
+
+        <record id="view_sms" model="ir.ui.view">
+            <field name="name">view.sms</field>
+            <field name="model">oc.sms</field>
+            <field name="priority">6</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Send" type="object" name="testMessage" states="sending"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet string="SMS">
+                        <group>
+                            <group>
+                                <field name="record_id"/>
+                                <field name="mobile_no" required="1" placeholder="e.g 92345xxxxxxx"/>
+                                <field name="message_body" required="1"/>
+                                <field name="reason"/>
+                            </group>
+                        </group>
+                        <!--<notebook>
+                            <page string="Sender List">
+                                <field name="sms_line">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="mobile" placeholder="e.g 92345xxxxxxx"/>
+                                        <field name="status" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_sms_tree" model="ir.ui.view">
+            <field name="name">view.sms.tree</field>
+            <field name="model">oc.sms</field>
+            <field name="arch" type="xml">
+                <tree decoration-primary="state == 'sending'" decoration-danger="state == 'fail'" decoration-success="state == 'sent'">
+                    <field name="create_date" string="Date"/>
+                    <field name="mobile_no"/>
+                    <field name="message_body"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_sms_search" model="ir.ui.view">
+            <field name="name">view.sms.tree</field>
+            <field name="model">oc.sms</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="mobile_no"/>
+                    <field name="state"/>
+                    <field name="message_body"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

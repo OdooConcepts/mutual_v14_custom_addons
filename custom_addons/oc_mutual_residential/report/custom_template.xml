@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="custom_category_template">
+    <!-- Category name -->
+    <t t-if="category">
+        <tr>
+            <td colspan="100" class="active" style="font-weight: bold; border-bottom: 1px solid black; border-top: 1px solid black; background-color:#eee;">&amp;bull;
+                <t t-if="category.name">
+                    <t t-esc="category.name"></t>
+                </t>
+                <t t-if="not category.name">
+                    Uncategorized
+                </t>
+            </td>
+        </tr>
+    </t>
+</template>
+
+
+<template id="custom_discount_template">
+    <!-- Subtotal -->
+     <t t-if="current_section.name=='Additional'">
+         <t t-if="sale_order.additional_discount > 0.0">
+             <tr class="text-right">
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td colspan="100">
+                     <strong>Special Discount:  </strong><span t-field="sale_order.additional_discount"/>Rs.
+                 </td>
+             </tr>
+         </t>
+         <t t-if="sale_order.additional_tax > 0.0">
+             <tr class="text-right">
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td colspan="100">
+                     <strong>Sales Tax 17%:  </strong><span t-field="sale_order.additional_tax"/>Rs.
+                 </td>
+             </tr>
+         </t>
+     </t>
+    <t t-if="current_section.name=='Installation Charges'">
+        <t t-if="sale_order.installation_discount > 0.0">
+            <tr class="text-right">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="100">
+                    <strong>Special Discount:  </strong><span t-field="sale_order.installation_discount"/>Rs.
+                </td>
+            </tr>
+        </t>
+    </t>
+    <t t-if="current_section.name=='Gsm Bentel'">
+        <tr class="text-right">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td colspan="100">
+                <t t-if="sale_order.gsm_discount > 0.0">
+                     <strong>Special Discount:  </strong><span t-esc="round(sale_order.gsm_discount)"/>Rs.
+                </t>
+            </td>
+        </tr>
+    </t>
+    <t t-if="current_section.name=='Monitoring Charges'">
+        <tr class="text-right">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td colspan="100">
+                <strong>SRB 19.5%:  </strong><span t-field="sale_order.monitoring_tax"/>Rs.<br/>
+                 <t t-if="sale_order.discounted_amount > 0.0">
+                    <strong>Special Discount:  </strong><span t-field="sale_order.discounted_amount"/>Rs.
+                </t>
+            </td>
+        </tr>
+    </t>
+</template>
+
+<template id="custom_separator_template">
+    <!-- Separator -->
+    <t t-if="'separator' in category and category.separator is True">
+        <tr class="text-center">
+            <td colspan="100">
+                ***
+            </td>
+        </tr>
+    </t>
+</template>
+</data>
+</odoo>

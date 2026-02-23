@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="sequence_complaint_title" model="ir.sequence">
+            <field name="name">Complaint title Sequence</field>
+            <field name="code">oc.complaint.title</field>
+            <field name="prefix">CT</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="disco_group" model="res.groups">
+            <field name="name">Disconnection Restriction</field>
+        </record>
+        <record id="ntn_group" model="res.groups">
+            <field name="name">NTN Restriction</field>
+        </record>
+        <record id="disco_remarks" model="res.groups">
+            <field name="name">Disconnection Remarks</field>
+        </record>
+    </data>
+</odoo>

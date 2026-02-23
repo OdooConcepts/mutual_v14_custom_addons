@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="sale_order_inherited_form_discount" model="ir.ui.view">
+                <field name="name">sale.order.inherit.form.discount</field>
+                <field name="model">sale.order</field>
+                <field name="inherit_id" ref="sale.view_order_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='amount_untaxed']" position="after">
+                       <field name="discount_amount" readonly="1"/>
+                      </xpath>
+                      <xpath expr="//field[@name='amount_tax']" position="after">
+                       <field name="discounted_amount" readonly="1"/>
+                      </xpath>
+                     <xpath expr="//field[@name='num_word']" position="after">
+                          <div class="oe_subtotal_footer_separator oe_inline o_td_label" style="font-size:15px;">
+                            <label for="discount_criteria" style="margin-right: 8px;font-size:15px;"/>
+                             <field name="discount_criteria" string="Discount Criteria"/>
+                              <br/>
+                               <label for="discount_method" style="margin-right: 8px;font-size:15px;"/>
+                              <br/>
+                              <field name="discount_method" string="Discount Method"/>
+                              <br/>
+                               <label for="discount_value" style="margin-right: 8px;font-size:15px;" attrs="{'invisible': [('discount_method', 'not in',['Fixed','Percentage'])]}"/>
+                           <field name="discount_value"  attrs="{'invisible': [('discount_method', 'not in',['Fixed','Percentage'])]}" />
+                          </div>
+                      </xpath>
+                </field>
+                </record>
+
+
+</odoo>

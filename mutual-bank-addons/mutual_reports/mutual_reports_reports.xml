@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--        <report-->
+<!--                id="custom_tax_breakup_invoice"-->
+<!--                model="account.move"-->
+<!--                string="Tax Break-Up Invoice"-->
+<!--                report_type="qweb-pdf"-->
+<!--                name="mutual_reports.tax_break_up_invoice"-->
+<!--                attachment_use="False"-->
+<!--                file="mutual_reports.tax_break_up_invoice"-->
+<!--        />-->
+
+<!--        <report-->
+<!--                id="custom_report_acknowledgment_receipt"-->
+<!--                model="account.move"-->
+<!--                string="Print Acknowledgment Receipt"-->
+<!--                report_type="qweb-pdf"-->
+<!--                name="mutual_reports.report_acknowledgment_receipt"-->
+<!--                attachment_use="False"-->
+<!--                file="mutual_reports.report_acknowledgment_receipt"-->
+<!--        />-->
+
+        <report
+                id="custom_report_issue_pdf"
+                model="project.task"
+                string="Print Issue"
+                report_type="qweb-pdf"
+                name="mutual_reports.report_issue_pdf"
+                attachment_use="False"
+                file="mutual_reports.report_issue_pdf"
+        />
+
+        <report
+                id="custom_custom_report_mutual_req_pdf"
+                model="mutual.requisition"
+                string="Print Slip"
+                report_type="qweb-pdf"
+                name="mutual_reports.custom_report_mutual_req_pdf"
+                attachment_use="False"
+                file="mutual_reports.custom_report_mutual_req_pdf"
+        />
+
+        <report
+                id="custom_custom_report_mutual_courier_pdf"
+                model="courier.sheet"
+                string="Print Slip"
+                report_type="qweb-pdf"
+                name="mutual_reports.custom_courier_sheet_report"
+                attachment_use="False"
+                file="mutual_reports.custom_courier_sheet_report"
+        />
+
+        <report
+                id="custom_custom_report_mutual_stock_return_pdf"
+                model="stock.return"
+                string="Print Slip"
+                report_type="qweb-pdf"
+                name="mutual_reports.custom_report_mutual_stock_return_pdf"
+                attachment_use="False"
+                file="mutual_reports.custom_report_mutual_stock_return_pdf"
+        />
+
+        <report
+                id="custom_report_history_pdf"
+                model="project.issue"
+                string="Technician History"
+                report_type="qweb-pdf"
+                name="mutual_reports.report_history_pdf"
+                attachment_use="False"
+                file="mutual_reports.report_history_pdf"
+        />
+
+        <report
+                id="custom_summary_sheet_pdf"
+                model="summary_sheet"
+                string="Summary Sheet"
+                report_type="qweb-pdf"
+                name="mutual_reports.summary_sheet_pdf"
+                attachment_use="False"
+                file="mutual_reports.summary_sheet_pdf"
+        />
+
+        <report
+                id="custom_technician_info_pdf"
+                model="hr.employee"
+                string="Technician Info"
+                report_type="qweb-pdf"
+                name="mutual_reports.technician_info_pdf"
+                attachment_use="False"
+                file="mutual_reports.technician_info_pdf"
+        />
+
+<!--        <report-->
+<!--                id="additional_invoice_pdf"-->
+<!--                model="account.move"-->
+<!--                string="Additional Invoice"-->
+<!--                report_type="qweb-pdf"-->
+<!--                name="mutual_reports.custom_additional_invoice_pdf"-->
+<!--                attachment_use="False"-->
+<!--                file="mutual_reports.custom_additional_invoice_pdf"-->
+<!--        />-->
+
+<!--        <report-->
+<!--                id="monitoring_invoice_pdf"-->
+<!--                model="account.move"-->
+<!--                string="Monitoring Invoice"-->
+<!--                report_type="qweb-pdf"-->
+<!--                name="mutual_reports.custom_monitoring_invoice_pdf"-->
+<!--                attachment_use="False"-->
+<!--                file="mutual_reports.custom_monitoring_invoice_pdf"-->
+<!--        />-->
+
+        <report
+                id="custom_customer_biodata_pdf"
+                model="res.partner"
+                string="Customer Biodata"
+                report_type="qweb-pdf"
+                name="mutual_reports.customer_biodata_pdf"
+                attachment_use="False"
+                file="mutual_reports.customer_biodata_pdf"
+        />
+
+        <report
+                id="custom_report_task_pdf"
+                model="project.task"
+                string="Print Task"
+                report_type="qweb-pdf"
+                name="mutual_reports.report_task_pdf"
+                attachment_use="False"
+                file="mutual_reports.report_task_pdf"
+        />
+
+        <report
+                id="action_wiz_recovery_report"
+                model="wiz.reports"
+                string="Report"
+                report_type="qweb-pdf"
+                name="mutual_reports.wiz_recovery_report"
+                file="mutual_reports.wiz_recovery_report"
+                menu="False"
+        />
+
+    </data>
+</odoo>

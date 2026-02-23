@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="technician_report_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <h2 style="text-align: center;">Time In/Out Report</h2>
+                            <br/>
+                            <table class="table table-condensed" style="font-size: 10px;">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Ticket #</th>
+                                        <th>Bank Code</th>
+                                        <th>Branch Code</th>
+                                        <th>CS Number</th>
+                                        <th>Title</th>
+                                        <th>Time In</th>
+                                        <th>Time Out</th>
+                                        <th>Total Time</th>
+                                        <th>Final Status</th>
+                                        <th>System Status</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.get_details()" t-as="l">
+                                        <tr style="font-weight: bold;">
+                                            <td colspan="12">
+                                                <span>Technician Name:</span>
+                                                <span t-esc="l['technician']" style="margin-left: 5px;"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="count" t-value="0"/>
+                                        <t t-foreach="l['complaints']" t-as="complaint">
+                                            <tr>
+                                                <td><span t-esc="count"/></td>
+                                                <td><span t-esc="complaint.issue_id"/></td>
+                                                <td><span t-esc="complaint.bank_code"/></td>
+                                                <td><span t-esc="complaint.branch_code"/></td>
+                                                <td><span t-esc="complaint.cs_number"/></td>
+                                                <td><span t-esc="complaint.tech_name.name"/></td>
+                                                <td><span t-field="complaint.date_start"/></td>
+                                                <td><span t-field="complaint.date_end"/></td>
+                                                <td><span t-esc="complaint.compute_total_time"/></td>
+                                                <td><span t-esc="complaint.reason"/></td>
+                                                <td><span t-esc="complaint.systemstatus"/></td>
+                                                <td><span t-esc="complaint.status"/></td>
+                                            </tr>
+                                            <t t-set="count" t-value="count + 1"/>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

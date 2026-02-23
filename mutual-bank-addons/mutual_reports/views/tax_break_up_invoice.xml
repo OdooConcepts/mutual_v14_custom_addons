@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="tax_break_up_invoice">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="account_invoice">
+                    <t t-call="web.external_layout">
+                        <t t-call="web.internal_layout">
+                            <div class="page">
+                                <div class="row">
+                                    <strong style="font-size:18px">
+                                        <span t-field="account_invoice.partner_id.name"/>
+                                        <br/>
+                                        <span t-if="account_invoice.partner_id.branch_code">
+                                            <span t-field="account_invoice.partner_id.branch_code"/>
+                                        </span>
+                                        <br/>
+                                        <span t-if="account_invoice.partner_id.street">
+                                            <span t-field="account_invoice.partner_id.street"/>
+                                        </span>
+                                        <br/>
+                                        <span t-if="account_invoice.partner_id.street2">
+                                            <span t-field="account_invoice.partner_id.street2"/>
+                                            <br/>
+                                        </span>
+                                        <span t-if="account_invoice.partner_id.city">
+                                            <span t-field="account_invoice.partner_id.city"/>
+                                            <br/>
+                                        </span>
+                                        <span t-if="account_invoice.partner_id.office">
+                                            <span t-field="account_invoice.partner_id.office"/>
+                                        </span>
+                                        <span t-if="account_invoice.partner_id.phone">
+                                            <span t-field="account_invoice.partner_id.phone"/>
+                                        </span>
+                                        <span t-if="account_invoice.partner_id.mobile">
+                                            <span t-field="account_invoice.partner_id.mobile"/>
+                                        </span>
+                                        <br/>
+                                    </strong>
+                                </div>
+
+                                <div class="row mt32 mb32" style="font-size:18px">
+                                    <div class="col-xs-3" t-if="account_invoice.invoice_date">
+                                        <strong>Invoice Date</strong>
+                                        <p t-field="account_invoice.invoice_date"/>
+                                    </div>
+                                    <div class="col-xs-3" t-if="account_invoice.ntn">
+                                        <strong>NTN</strong>
+                                        <p t-field="account_invoice.ntn"/>
+                                    </div>
+                                    <div class="col-xs-3"
+                                         t-if="account_invoice.partner_id.bank_code == 'TMBL' or account_invoice.partner_id.bank_code == 'JSBL' ">
+                                        <strong>STN</strong>
+                                        <br/>
+                                        17-00-3764-757-19
+                                        <!-- <p t-field="account_invoice.sales_tax_no"/>-->
+                                    </div>
+                                </div>
+
+                                <h1>Invoice#
+                                    <span t-field="account_invoice.id"/>
+                                </h1>
+
+                                <table class="table table-condensed" style="font-size:16px">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Quantity</th>
+                                            <th class="text-right">Unit Price</th>
+                                            <th class="text-right">Tax Rate</th>
+                                            <th class="text-right">Tax Amount</th>
+                                            <th class="text-right">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="account_invoice.invoice_line_ids" t-as="line">
+                                            <td>
+                                                <span t-field="line.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.quantity"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="line.price_unit"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="line.tax_line_id.name"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="line.tax_amount"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="line.price_subtotal"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="4"></td>
+                                            <td class="text-right">
+                                                <strong>Taxes</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="account_invoice.amount_tax"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"></td>
+                                            <td class="text-right">
+                                                <strong>Total</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <strong>
+                                                    <span t-field="account_invoice.amount_total"/>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                                <div class="row">
+                                    <div class="col-xs-4 pull-right">
+                                        <table class="table table-condensed" style="font-size:16px">
+                                            <tr class="border-black">
+                                                <td>
+                                                    <strong>Total Without Taxes</strong>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="account_invoice.amount_untaxed"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <br/>
+                                    <div class="pull-left" style="font-size:16px">
+                                        <span style="margin-left:15px">Amount In Words:
+                                            <span t-esc="account_invoice.currency_id.amount_to_text(account_invoice.amount_total)"/>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <br/><br/><br/>
+
+                                <div class="row">
+                                    <div class="col-xs-4 pull-left">
+                                        <table style="font-size:16px">
+                                            <tr>
+                                                <td>
+                                                    <img t-if="user.signature_image" t-att-src="user.signature_image"
+                                                         style="max-height: 50px; max-width: 200px;" class="img-rounded"/>
+                                                    <br/>Prepared By
+                                                    <span t-field="user.name"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="font-size:16px">
+                                    <div class="pull-left">
+                                        <span style="margin-left:15px">
+                                            <strong>Payment:Please make your payment via DD/P.O in favour of "Mutual
+                                                Security Systems Private Limited"
+                                            </strong>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

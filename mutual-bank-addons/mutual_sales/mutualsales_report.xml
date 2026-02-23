@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_customer_form"
+            string="Customer Info"
+            model="res.partner"
+            report_type="qweb-pdf"
+            name="mutual_sales.report_customer"
+            file="mutual_sales.report_customer"
+            />
+    </data>
+</odoo>

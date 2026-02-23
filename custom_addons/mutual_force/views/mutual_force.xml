@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <menuitem
+                name="Force"
+                id="force_top_menu"
+                sequence="50"/>
+
+        <menuitem
+                name="Force"
+                id="force_side_top_menu"
+                parent="force_top_menu"
+                sequence="10"/>
+
+        <!-- ================================================== Begin menuitem of Force Details ================================================ -->
+        <record id="mutual_force_details" model="ir.actions.act_window">
+            <field name="name">Force Details</field>
+            <field name="res_model">force.details</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">click create to add a new record</p>
+            </field>
+        </record>
+
+        <menuitem name="Force Details"
+                  action="mutual_force_details"
+                  id="menu_mutual_force_details"
+                  sequence="10"
+                  parent="force_side_top_menu"/>
+
+        <!-- ================================================== End menuitem of Force Details ================================================ -->
+
+
+        <!-- ================================================== Begin menuitem of Bank Customers ================================================ -->
+        <record id="mutual_force_bank_customers" model="ir.actions.act_window">
+            <field name="name">Bank Customers</field>
+            <field name="res_model">bank.customers</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">click create to add a new record</p>
+            </field>
+        </record>
+
+        <menuitem name="Customers"
+                  action="mutual_force_bank_customers"
+                  id="menu_mutual_force_bank_customers"
+                  sequence="110"
+                  parent="force_side_top_menu"/>
+
+        <!-- ================================================== End menuitem of Bank Customrss ================================================ -->
+
+
+        <!-- ================================================== Begin menuitem of guard Details ================================================ -->
+        <record id="mutual_guard_details" model="ir.actions.act_window">
+            <field name="name">Guard Details</field>
+            <field name="res_model">guard.details</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">click create to add a new record</p>
+            </field>
+        </record>
+
+        <menuitem name="Guard Details"
+                  action="mutual_guard_details"
+                  id="menu_mutual_guard_details"
+                  sequence="20"
+                  parent="force_side_top_menu"/>
+
+        <!-- ==================================================  End menuitem of guard Details ================================================ -->
+
+        <!-- ================================================== Begin menuitem of response time ================================================ -->
+        <record id="mutual_response_time" model="ir.actions.act_window">
+            <field name="name">Response Time</field>
+            <field name="res_model">response.time</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">click create to add a new record</p>
+            </field>
+        </record>
+
+        <menuitem name="Response TimeIn/Out"
+                  action="mutual_response_time"
+                  id="menu_mutual_response_time"
+                  sequence="30"
+                  parent="force_side_top_menu"/>
+
+        <!-- ==================================================  End menuitem of response time ================================================ -->
+
+
+        <!-- ================================================== Begin menuitem of  recovery response time ================================================ -->
+        <record id="mutual_recovery_response_time" model="ir.actions.act_window">
+            <field name="name">Recovery Response Time</field>
+            <field name="res_model">recovery.visits</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">click create to add a new record</p>
+            </field>
+        </record>
+
+        <menuitem name="Recovery Response TimeIn/Out"
+                  action="mutual_recovery_response_time"
+                  id="menu_mutual_recovery_response_time"
+                  sequence="20"
+                  parent="force_side_top_menu"/>
+
+        <!-- ==================================================  End menuitem of  recovery response time ================================================ -->
+
+        <!-- ================================================== Begin menuitem of New Visits ================================================ -->
+        <record id="mutual_new_visits" model="ir.actions.act_window">
+            <field name="name">New Visits</field>
+            <field name="res_model">new.visits</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">click create to add a new record</p>
+            </field>
+        </record>
+
+        <menuitem name="New Site Visits"
+                  action="mutual_new_visits"
+                  id="menu_mutual_new_visits"
+                  sequence="40"
+                  parent="force_side_top_menu"/>
+
+        <!-- ==================================================  End menuitem of New Visits ================================================ -->
+
+        <!-- ================================================== Begin Form view of Force Details ================================================ -->
+
+        <record id="force_details_form_view" model="ir.ui.view">
+            <field name="name">force_details.form.view</field>
+            <field name="model">force.details</field>
+            <field name="arch" type="xml">
+                <form string="Force Details">
+                    <sheet>
+                        <group string="Force Details">
+                            <group>
+                                <field name="force_name"/>
+                                <field name="supervisor"/>
+                                <field name="contact"/>
+                                <field name="contact2"/>
+                            </group>
+                            <group>
+                                <field name="covered_area"/>
+                                <field name="force_code"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ================================================== End Form view of Force Details ================================================ -->
+
+        <!-- ================================================== Begin tree view of Force Details ================================================ -->
+        <record id="force_details_tree_view" model="ir.ui.view">
+            <field name="name">force.details.form.view</field>
+            <field name="model">force.details</field>
+            <field name="arch" type="xml">
+                <tree string="Force Details Tree">
+                    <field name="force_name"/>
+                    <field name="supervisor"/>
+                    <field name="contact"/>
+                    <field name="covered_area"/>
+                    <field name="force_code"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ================================================== End tree view of Force Details ================================================ -->
+
+
+        <!-- ================================================== Begin Form view of Bank Customers ================================================ -->
+
+        <record id="force_details_form_view" model="ir.ui.view">
+            <field name="name">bank.customers.form.view</field>
+            <field name="model">bank.customers</field>
+            <field name="arch" type="xml">
+                <form string="Bank Customers">
+                    <sheet>
+                        <group string="Bank Customers">
+                            <group>
+                                <field name="name"/>
+                                <field name="cs"/>
+                                <field name="branch_code"/>
+                                <field name="bank_coder"/>
+                            </group>
+                            <group>
+                                <field name="street1"/>
+                                <field name="street2"/>
+                                <field name="city"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ================================================== End Form view of Bank Customers ================================================ -->
+
+        <!-- ================================================== Begin tree view of Bank Customers ================================================ -->
+        <record id="bank_customers_tree_view" model="ir.ui.view">
+            <field name="name">bank.customers.tree.view</field>
+            <field name="model">bank.customers</field>
+            <field name="arch" type="xml">
+                <tree string="Bank Customers Tree">
+                    <field name="name" readonly="1"/>
+                    <field name="cs" readonly="1"/>
+                    <!--<field name="branch_code" readonly="1"/>-->
+                    <!--<field name="bank_coder" readonly="1"/>-->
+                    <field name="street1" readonly="1"/>
+                    <field name="street2" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ================================================== End tree view of Force Details ================================================ -->
+
+        <!-- ================================================== Begin Search view of Bank Customers ================================================ -->
+        <record id="bank_customers_search_view" model="ir.ui.view">
+            <field name="name">bank_customers_search_view</field>
+            <field name="model">bank.customers</field>
+            <field name="arch" type="xml">
+                <search string="Bank Customers Search">
+                    <field name="cs"/>
+                    <field name="branch_code"/>
+                    <field name="bank_coder"/>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        <!-- ================================================== End Search view of Bank Customers ================================================ -->
+
+
+        <!-- ================================================== Begin Form view of Guard Details ================================================ -->
+
+        <record id="guard_details_form_view" model="ir.ui.view">
+            <field name="name">guard.details.form.view</field>
+            <field name="model">guard.details</field>
+            <field name="arch" type="xml">
+                <form string="Guard Details">
+                    <sheet>
+                        <group string="Guard Details">
+                            <group>
+                                <field name="guard_name"/>
+                                <field name="nic"/>
+                                <field name="contact"/>
+                            </group>
+                            <group>
+                                <field name="address"/>
+                                <field name="force_details"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ================================================== End Form view of Force Details ================================================ -->
+
+        <!-- ================================================== Begin tree view of Force Details ================================================ -->
+        <record id="guard_details_tree_view" model="ir.ui.view">
+            <field name="name">guard.details.form.view</field>
+            <field name="model">guard.details</field>
+            <field name="arch" type="xml">
+                <tree string="Guard Details Tree">
+                    <field name="guard_name"/>
+                    <field name="nic"/>
+                    <field name="contact"/>
+                    <field name="address"/>
+                    <field name="force_details"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ================================================== End tree view of Force Details ================================================ -->
+
+        <!-- ================================================== Begin tree view of Response Time ================================================ -->
+        <record id="response_tree_view" model="ir.ui.view">
+            <field name="name">response.time.tree.view</field>
+            <field name="model">response.time</field>
+            <field name="arch" type="xml">
+                <tree string="Response Time Tree" editable="top">
+                    <field name="customer"/>
+                    <field name="name"/>
+                    <field name="address"/>
+                    <field name="force_name"/>
+                    <field name="dispatch_time"/>
+                    <field name="reach_time"/>
+                    <field name="minutes" readonly="1"/>
+                    <!--  <field name="shift_time"/> -->
+                    <field name="move"/>
+                    <field name="remarks"/>
+                    <field name="cms" required="1"/>
+                    <field name="create_uid" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ================================================== End tree view of Response Time ================================================ -->
+
+
+        <!-- ================================================== Begin tree view of Recovery Response Time ================================================ -->
+        <record id="recovery_response_tree_view" model="ir.ui.view">
+            <field name="name">recovery.visits.tree.view</field>
+            <field name="model">recovery.visits</field>
+            <field name="arch" type="xml">
+                <tree string="Response Time Tree" editable="top">
+                    <field name="cs_number"/>
+                    <field name="name"/>
+                    <field name="force"/>
+                    <field name="time"/>
+                    <field name="status"/>
+                    <field name="recovery_officer"/>
+                    <field name="create_date" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ================================================== End tree view of Recovery Response Time ================================================ -->
+
+
+        <!-- ================================================== Begin kanban view of new visits ================================================ -->
+        <record model="ir.ui.view" id="new_visits_kanban">
+            <field name="name">New Visit Kanban</field>
+            <field name="model">new.visits</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by='stages' quick_create="0">
+                    <!-- write fields here to be used in kanban box-->
+                    <field name='name'/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_semantic_html_override">
+                                <!--<a type="open">-->
+                                <!--&lt;!&ndash; set image here&ndash;&gt;-->
+                                <!--<img t-att-src="kanban_image('new.visits', 'image', record.id.value)" class="oe_kanban_image"/>-->
+                                <!--</a>-->
+                                <a type="open">
+                                    <div class="oe_kanban_details">
+                                        <strong>
+                                            <field name='name'/>
+                                        </strong>
+                                        <br/>
+                                        <strong>
+                                            <field name='cs_number'/>
+                                        </strong>
+                                        <br/>
+                                        <em>
+                                            <field name='address'/>
+                                        </em>
+                                    </div>
+                                </a>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- ================================================== End kanban view of new visits ================================================ -->
+
+        <!-- ================================================== Begin Form view of New visits ================================================ -->
+
+        <record id="new_visits_form_view" model="ir.ui.view">
+            <field name="name">new.visits.form.view</field>
+            <field name="model">new.visits</field>
+            <field name="arch" type="xml">
+                <form string="New Site Visits">
+                    <sheet>
+                        <group string="New Site Visits">
+                            <group>
+                                <field name="name"/>
+                                <field name="cs_number"/>
+                                <field name="address"/>
+                            </group>
+                            <group>
+                                <!--<field name="stages"/>-->
+                                <field name="first_visit"/>
+                                <field name="first_visit_remarks" attrs="{'invisible': [('first_visit','=',False)]}"/>
+                                <field name="second_visit"/>
+                                <field name="second_visit_remarks" attrs="{'invisible': [('second_visit','=',False)]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ================================================== End Form view of New Visits ================================================ -->
+
+        <!-- ================================================== Begin tree view of New Visits ================================================ -->
+        <record id="new_visits_tree_view" model="ir.ui.view">
+            <field name="name">new.visits.tree.view</field>
+            <field name="model">new.visits</field>
+            <field name="arch" type="xml">
+                <tree string="Guard Details Tree">
+                    <field name="name"/>
+                    <field name="cs_number"/>
+                    <field name="address"/>
+                    <field name="first_visit"/>
+                    <field name="second_visit"/>
+                    <field name="stages"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ================================================== End tree view of New Visits ================================================ -->
+
+        <!-- ================================================== Begin Search view of New Visits ================================================ -->
+
+        <record id="new_visits_search_view" model="ir.ui.view">
+            <field name="name">response.time.search.view</field>
+            <field name="model">response.time</field>
+            <field name="arch" type="xml">
+                <search string="Guard Details Search">
+                    <field name="customer"/>
+                    <field name="name"/>
+                    <field name="force_name"/>
+                    <group string="By Day/Month/Year">
+                        <filter name="create_date" string="Daily" context="{'group_by':'create_date:day'}"/>
+                        <filter name="create_date" string="Monthly" context="{'group_by':'create_date:month'}"/>
+                        <filter name="create_date" string="Yearly" context="{'group_by':'create_date:year'}"/>
+                    </group>
+
+                    <group string="By Morning/Evening/Night">
+                        <filter string="Morning" name="shift_time" domain="[('shift_time','=','morning')]"/>
+                        <filter string="Evening" name="shift_time" domain="[('shift_time', '=', 'evening')]"/>
+                        <filter string="Night" name="shift_time" domain="[('shift_time', '=', 'night')]"/>
+                    </group>
+                    <field name="create_uid"/>
+                </search>
+            </field>
+        </record>
+        <!-- ================================================== End Search view of New Visits ================================================ -->
+
+        <record id="action_partner_customer_form" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{'default_customer':1, 'search_default_customer':1}</field>
+            <field name="filter" eval="True"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a contact in your address book.
+                </p>
+                <p>
+                    Odoo helps you easily track all activities related to
+                    a customer: discussions, history of business opportunities,
+                    documents, etc.
+                </p>
+            </field>
+        </record>
+
+        <record id="partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="title" position="after">
+                    <field name="is_visit"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

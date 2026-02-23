@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Custom Report: Mutual Requisition PDF -->
+        <template id="custom_report_mutual_req_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="obj">
+                    <div class="page">
+                        <t t-if="obj['req_type'] == 'New Installation'">
+                            <h1 align="center">New Installation BAS Requisition</h1>
+                        </t>
+                        <t t-if="obj['req_type'] == 'Additional'">
+                            <h1 align="center">Additional BAS Devices Requisition</h1>
+                        </t>
+                        <br/><br/>
+                        <div style="font-size:18px;width:900px;display:inline-block;">
+                            <span style="font-size:18px">
+                                <t t-if="obj['req_code'] is not False">
+                                    <strong>Serial No.:</strong>
+                                    <span t-esc="obj['req_code']"/>
+                                </t>
+                                <t t-if="not obj['req_code']">
+                                    <strong>Receipt no.:</strong>
+                                    <span t-esc="obj['id']"/>
+                                </t>
+                                <br/>
+                                <strong>Date:</strong>
+                                <span t-esc="obj['date']"/>
+                                <br/>
+                                <strong>Receipt Type:</strong>
+                                <span t-esc="obj['req_type']"/>
+                                <br/>
+                                <div style="border:2px solid grey; padding:10px;border-radius:10px;">
+                                    <strong style="font-size:18px">Title:</strong>
+                                    <br/>
+                                    <span t-esc="obj['title']"/>
+                                    <br/>
+                                </div>
+                            </span>
+                            <br/><br/>
+                        </div>
+                        <table class="table table-sm o_main_table" name="invoice_line_table" style="font-size:16px">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Type</th>
+                                        <th>Customer/Technician</th>
+                                        <th>CS Number</th>
+                                        <th>Location</th>
+                                        <th>Reference</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="invoice_tbody">
+                                    <tr t-foreach="obj['products']" t-as="l">
+                                        <td><span t-esc="l['courier_sheet_products']['name']"/></td>
+                                        <td><span t-esc="l['type']"/></td>
+                                        <td><span t-esc="l['customer']['name']"/></td>
+                                        <td><span t-esc="l['cs_number']"/></td>
+                                        <td><span t-esc="l['location']"/></td>
+                                        <td><span t-esc="l['ref_to']"/></td>
+                                        <td><span t-esc="l['quantity']"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/><br/> <br/><br/>
+                            <div class="row">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div style="font-size:17px;text-decoration:overline;">
+                                                <span style="margin-top:5px; margin-left:70px;">
+                                                    <strong>Inventory Officer</strong>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="font-size:17px;text-decoration:overline;">
+                                                <span style="margin-top:5px; margin-left:65px;">
+                                                    <strong>Manager Services</strong>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="font-size:17px;text-decoration:overline;">
+                                                <span style="margin-top:5px; margin-left:65px;">
+                                                    <strong>Accounts Department</strong>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="font-size:17px;text-decoration:overline;">
+                                                <span style="margin-top:5px; margin-left:65px;">
+                                                    <strong>GM Services</strong>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <br/><br/><br/><br/>
+                                <div class="pull-right" style="font-size:17px;text-decoration:overline;">
+                                    <span style="margin-top:5px; margin-right:104px;">
+                                        <strong>CEO's Approval</strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div style="font-size:16px;border:2px solid grey; padding:10px;border-radius:10px;width:90%;margin-top:50px;">
+                                <strong>Total Products Summary</strong>
+                                <t t-foreach="obj.cumm_product_data()" t-as="line">
+                                    <span t-esc="line.get('name')"/>:<span t-esc="line.get('quantity')"/>,
+                                </t>
+                            </div>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

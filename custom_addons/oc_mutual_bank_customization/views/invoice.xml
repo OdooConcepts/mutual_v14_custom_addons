@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view inheritance-->
+    <record id="view_move_form_inherited_custom" model="ir.ui.view">
+        <field name="name">account.move.inherit.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="invoice_date" position="after">
+                <field name="create_uid" visible="1"/>
+                <field name="create_date" visible="1"/>
+                <label for="monitoring_period_to" string="Monitoring Period"/>
+                <div class="d-flex">
+                    <field name="monitoring_period_from"/>
+                    <span style="margin: 7px;">to</span>
+                    <field name="monitoring_period_to"/>
+                </div>
+            </field>
+            <field name="payment_reference" position="after">
+                <field name="invoice_ref" placeholder="Invoice Reference" invisible="1"/>
+                <field name="cs_number" placeholder="CS Number" readonly="1" force_save="1"/>
+                <field name="branch_code" placeholder="Branch Code" readonly="1" force_save="1"/>
+                <field name="bank_code" placeholder="Bank Code" readonly="1" force_save="1"/>
+            </field>
+            <xpath expr="//page[2]" position='after'>
+                <page string="Payment Details">
+                    <group id="Payment_tab_group">
+                        <group>
+                            <field name="payment_status"/>
+                            <field name="po_dd"/>
+                            <field name="actual_amount"/>
+                        </group>
+                        <group>
+                            <field name="cheque_date"/>
+                            <field name="cheque_number"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!--tree view inheritance-->
+    <openerp>
+        <data>
+            <record id="view_move_tree_inherited_custom" model="ir.ui.view">
+                <field name="name">account.move.inherit.tree</field>
+                <field name="model">account.move</field>
+                <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='invoice_date']" position="after">
+                        <field name="cs_number" optional="show"/>
+                        <field name="branch_code" optional="show"/>
+                        <field name="bank_code" optional="show"/>
+                        <field name="create_uid" optional="show"/>
+                        <field name="create_date" optional="show"/>
+                        <field name="invoice_ref" optional="show" invisible="1"/>
+                    </xpath>
+                </field>
+            </record>
+        </data>
+    </openerp>
+
+    <!--search view inheritance-->
+    <record id="view_move_search_inherited_custom" model="ir.ui.view">
+        <field name="name">account.move.inherit.search</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/group" position="inside">
+                <filter name="CS Number"/>
+                <filter name="Branch Code"/>
+                <filter name="Bank Code"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

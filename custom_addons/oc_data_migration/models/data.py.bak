@@ -1,0 +1,25 @@
+from odoo import fields, models
+
+class DataMigration(models.Model):
+    _name = "data.migration"
+    _description = "Oc Data Migration"
+    id = fields.Integer(string='Id', required=True, tracking=True)
+    company_id = fields.Integer(string='Company Id', tracking=True)
+    partner_id = fields.Char(string='Partner Id', tracking=True)
+    reconcile_id = fields.Integer(string='Reconcile Partial Id', tracking=True)
+    credit = fields.Float(string='Credit', tracking=True)
+    journal_id = fields.Integer(string='Journal Id', tracking=True)
+    state = fields.Char(string='State', tracking=True)
+    debit = fields.Float(string='Debit', tracking=True)
+    ref = fields.Char(string='Reference', tracking=True)
+    account_id = fields.Integer(string='Account Id', tracking=True)
+    period_id = fields.Integer(string='Period Id', tracking=True)
+    date = fields.Date(string='Date', tracking=True)
+    move_id = fields.Integer(string='Move Id', tracking=True)
+    name = fields.Char(string='name', tracking=True)
+    tax_amount = fields.Integer(string='Tax Amount', tracking=True)
+    product_id = fields.Integer(string='Product Id', tracking=True)
+    account_tax_id = fields.Integer(string='Account Tax Id', tracking=True)
+    product_uom_id = fields.Integer(string='Product UOM Id', tracking=True)
+    amount_currency = fields.Integer(string='Amount Currency', tracking=True)
+    quantity = fields.Integer(string='Quantity')

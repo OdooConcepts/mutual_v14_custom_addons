@@ -1,0 +1,33 @@
+<openerp>
+    <data>
+       <!-- ================================================== Begin Form views of Report Wizard ================================================ -->
+        <record id="wiz_invoices_writeoff" model="ir.ui.view">
+            <field name="name">Writeoff Invoices</field>
+            <field name="model">wiz.invoices.writeoff</field>
+            <field name="arch" type="xml">
+                <form string="Report" version="8.0">
+                    <group>
+                        <field name="date"/>
+                        <field name="cheque_no"/>
+                        <field name="bank_code"/>
+                        <field name="invoice_amount"/>
+                        <field name="received_amount"/>
+                    </group>
+                        <footer>
+                            <button name="inv_status_change_request" type="object" string="Update" class="oe_highlight"/>
+                            OR
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                </form>
+            </field>
+        </record>
+        <!-- ================================================== End Form views of Report Wizard ================================================ -->
+        <record id="action_wiz_invoices_writeoff" model="ir.actions.act_window">
+            <field name="name">Writeoff Wizard</field>
+            <field name="res_model">wiz.invoices.writeoff</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_oc_requisition_line_search" model="ir.ui.view">
+        <field name="name">oc.requisition.line.search</field>
+        <field name="model">oc.requisition.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field string="Product" name="product_id" />
+                <field string="Type" name="type"/>
+                <field string="Customer/Technician" name="partner_id"/>
+                <field string="Location" name="location"/>
+                <field string="CS Number" name="cs_number"/>
+                <field string="Branch Code" name="branch_code"/>
+                <field string="Status" name="status"/>
+                <field string="Reference" name="ref"/>
+                <field string="Quantity" name="quantity"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_oc_requisition_line_tree" model="ir.ui.view">
+        <field name="name">oc.requisition.line.tree</field>
+        <field name="model">oc.requisition.line</field>
+        <field name="arch" type="xml">
+            <tree string="Requisition Report" create="false" delete="false">
+                <field name="product_id"/>
+                <field name="type"/>
+                <field name="partner_id"/>
+                <field name="location"/>
+                <field name="cs_number"/>
+                <field name="branch_code"/>
+                <field name="status"/>
+                <field name="ref"/>
+                <field name="quantity"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_oc_requisition_report" model="ir.actions.act_window">
+        <field name="name">Requisition Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oc.requisition.line</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Requisition Report
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Report" action="action_oc_requisition_report"
+              id="menu_action_oc_requisition_report"
+              parent="menu_requisition" sequence="32"/>
+
+
+</odoo>

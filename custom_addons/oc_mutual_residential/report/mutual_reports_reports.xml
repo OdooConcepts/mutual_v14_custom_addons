@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_report_partner_balances" model="ir.actions.report">
+            <field name="name">Balances</field>
+            <field name="model">partner.balance.report.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">oc_mutual_residential.report_partner_balance_details</field>
+            <field name="report_file">oc_mutual_residential.report_partner_balance_details</field>
+            <field name="binding_model_id" ref="model_partner_balance_report_wizard"/>
+            <field name="binding_type">report</field>
+        </record>
+         <record id="action_report_sales_summary" model="ir.actions.report">
+            <field name="name">Sales Summary</field>
+            <field name="model">wiz.sales.summary</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">oc_mutual_residential.report_sales_summary</field>
+            <field name="report_file">oc_mutual_residential.report_sales_summary</field>
+            <field name="binding_model_id" ref="model_wiz_sales_summary"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="custom_invoice_pdf" model="ir.actions.report">
+            <field name="name">Monitoring Invoice (New Format)</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">oc_mutual_residential.report_invoice_monitoring</field>
+            <field name="report_file">oc_mutual_residential.report_invoice_monitoring</field>
+            <field name="print_report_name">'Monitoring Invoice - %s' % (object.name).replace('/', '')</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <record id="custom_mspl_invoice_pdf" model="ir.actions.report">
+            <field name="name">Monitoring Invoice (Old Format)</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">oc_mutual_residential.custom_mspl_invoice</field>
+            <field name="report_file">oc_mutual_residential.custom_mspl_invoice</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="acknowledgement_receipt_pdf" model="ir.actions.report">
+            <field name="name">Print Acknowledgement Receipt</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">oc_mutual_residential.acknowledgement_receipt</field>
+            <field name="report_file">oc_mutual_residential.acknowledgement_receipt</field>
+            <field name="print_report_name">'Acknowledgement Receipt - %s' % (object.name).replace('/', '')</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- <record id="custom_quotation_pdf" model="ir.actions.report">
+             <field name="name">Monitoring Quotation</field>
+             <field name="model">sale.order</field>
+             <field name="report_type">qweb-pdf</field>
+             <field name="report_name">oc_mutual_residential.custom_quotation</field>
+             <field name="report_file">oc_mutual_residential.custom_quotation</field>
+             <field name="print_report_name">'Monitoring Quotation - %s' % (object.name).replace('/', '')</field>
+             <field name="binding_model_id" ref="model_sale_order"/>
+             <field name="binding_type">report</field>
+         </record>
+
+          <record id="custom_additional_quotation_pdf" model="ir.actions.report">
+             <field name="name">Additional Quotation</field>
+             <field name="model">sale.order</field>
+             <field name="report_type">qweb-pdf</field>
+             <field name="report_name">oc_mutual_residential.custom_additional_quotation</field>
+             <field name="report_file">oc_mutual_residential.custom_additional_quotation</field>
+             <field name="print_report_name">'Additional Quotation - %s' % (object.name).replace('/', '')</field>
+             <field name="binding_model_id" ref="model_sale_order"/>
+             <field name="binding_type">report</field>
+         </record>-->
+
+
+        <record id="custom_report_issue_pdf" model="ir.actions.report">
+            <field name="name">Print Issue</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">oc_mutual_residential.report_issue_pdf</field>
+            <field name="report_file">oc_mutual_residential.report_issue_pdf</field>
+            <field name="print_report_name">'Print Issue - %s' % (object.name).replace('/', '')</field>
+            <field name="binding_model_id" ref="model_helpdesk_ticket"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="custom_report_history_pdf" model="ir.actions.report">
+            <field name="name">Technician History</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">oc_mutual_residential.report_history_pdf</field>
+            <field name="report_file">oc_mutual_residential.report_history_pdf</field>
+            <field name="print_report_name">'Print Technican History - %s' % (object.name).replace('/', '')</field>
+            <field name="binding_model_id" ref="model_helpdesk_ticket"/>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <record id="report_print_voucher" model="ir.actions.report">
+            <field name="name">Print Voucher</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">oc_mutual_residential.report_print_voucher_pdf</field>
+            <field name="report_file">oc_mutual_residential.report_print_voucher_pdf</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="report_customer_address" model="ir.actions.report">
+            <field name="name">Print Address</field>
+            <field name="model">res.partner</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">oc_mutual_residential.customer_address</field>
+            <field name="report_file">oc_mutual_residential.customer_address</field>
+            <field name="binding_model_id" ref="model_res_partner"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

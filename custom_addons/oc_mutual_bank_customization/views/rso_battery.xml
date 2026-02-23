@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_rso_battery_tree" model="ir.ui.view">
+        <field name="name">rso.battery.tree</field>
+        <field name="model">rso.battery</field>
+        <field name="arch" type="xml">
+            <tree string="Low Battery/ RSO SMS">
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+    <record id="rso_battery_form" model="ir.ui.view">
+        <field name="name">LOW Battery RSO SMS Form</field>
+        <field name="model">rso.battery</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button type="object" name="send_sms" string="Send SMS" class="oe_highlight"
+                    attrs="{'invisible': [('state', 'in', ['send'])]}"
+                    />
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                      <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object" name="action_rso_battery_sms"
+                            icon="fa-pencil-square-o">
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="sms_count"/>
+                            </span>
+                            <span class="o_stat_text">View SMS</span>
+                        </div>
+                    </button>
+                </div>
+                    <group>
+                        <group>
+                            <field name="type"/>
+                            <field name="customer" attrs=" {'invisible': [('type','in',('technician','rso'))]
+                            ,'required': [('type','in',('customer'))]
+                            } "/>
+                            <field name="technician" attrs="{'invisible': [('type','in',('customer','rso'))]
+                            ,'required': [('type','in',('technician'))]
+                            }"/>
+                        </group>
+                    </group>
+                    <group string="SMS">
+                        <group>
+                            <field name="contact_no"/>
+                        </group>
+                        <field name="sms" placeholder="Write Your SMS here!"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_rso_battery" model="ir.actions.act_window">
+        <field name="name">Low Battery/ RSO SMS</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rso.battery</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Low Battery/ RSO SMS
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Low Battery/ RSO SMS" action="action_rso_battery"
+              id="menu_action_rso_battery"
+              parent="menu_miscellaneous" sequence="31"/>
+
+
+</odoo>

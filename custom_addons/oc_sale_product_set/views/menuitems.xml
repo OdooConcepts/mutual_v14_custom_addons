@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+        <menuitem id="menu_product_packages_action"
+        action="product_sets_action"
+        parent="sale.prod_config_main"  sequence="2"/>
+</odoo>

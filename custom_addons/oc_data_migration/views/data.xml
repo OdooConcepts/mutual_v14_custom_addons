@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="invoice_lines_migration_tree" model="ir.ui.view">
+        <field name="name">invoice.lines.migration.tree</field>
+        <field name="model">invoice.lines.migration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="old_product_id"/>
+                <field name="old_sytem_id"/>
+                <field name="old_account_id"/>
+                <field name="section"/>
+                <field name="effect_on_inventory"/>
+                <field name="quantity"/>
+                <field name="unit_price"/>
+                <field name="tax"/>
+            </tree>
+        </field>
+    </record>
+    <!--form view-->
+    <record id="view_invoice_lines_migration_form" model="ir.ui.view">
+        <field name="name">invoice.lines.migration.form</field>
+        <field name="model">invoice.lines.migration</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="old_product_id"/>
+                        <field name="old_sytem_id"/>
+                        <field name="old_account_id"/>
+                        <field name="section"/>
+                        <field name="effect_on_inventory"/>
+                        <field name="quantity"/>
+                        <field name="unit_price"/>
+                        <field name="tax"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <!--We create action-->
+    <record id="invoice_lines_migration_action" model="ir.actions.act_window">
+        <field name="name">Invoice Lines Migration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoice.lines.migration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record!
+            </p>
+        </field>
+    </record>
+
+
+    <record id="invoice_migration_tree" model="ir.ui.view">
+        <field name="name">invoice.migration.tree</field>
+        <field name="model">invoice.migration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="old_partner_id"/>
+                <field name="invoice_date"/>
+                <field name="old_system_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="courier"/>
+                <field name="payment_received"/>
+                <field name="po_dd"/>
+                <field name="cheque_no"/>
+                <field name="cheque_date"/>
+                <field name="cheque_received_date"/>
+                <field name="actual_received_amount"/>
+            </tree>
+        </field>
+    </record>
+    <!--form view-->
+    <record id="view_invoice_migration_form" model="ir.ui.view">
+        <field name="name">invoice.migration.form</field>
+        <field name="model">invoice.migration</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="old_partner_id"/>
+                        <field name="invoice_date"/>
+                        <field name="old_system_id"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="courier"/>
+                        <field name="payment_received"/>
+                        <field name="po_dd"/>
+                        <field name="cheque_no"/>
+                        <field name="cheque_date"/>
+                        <field name="cheque_received_date"/>
+                        <field name="actual_received_amount"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <!--We create action-->
+    <record id="invoice_migration_action" model="ir.actions.act_window">
+        <field name="name">Invoice Migration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoice.migration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record!
+            </p>
+        </field>
+    </record>
+
+    <!--Tree view-->
+    <record id="data_migration_tree" model="ir.ui.view">
+        <field name="name">data.migration.tree</field>
+        <field name="model">data.migration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id"/>
+                <field name="company_id"/>
+                <field name="partner_id"/>
+                <field name="reconcile_id"/>
+                <field name="credit"/>
+                <field name="journal_id"/>
+                <field name="state"/>
+                <field name="debit"/>
+                <field name="ref"/>
+                <field name="account_id"/>
+                <field name="period_id"/>
+                <field name="date"/>
+                <field name="move_id"/>
+                <field name="name"/>
+                <field name="tax_amount"/>
+                <field name="product_id"/>
+                <field name="account_tax_id"/>
+                <field name="product_uom_id"/>
+                <field name="amount_currency"/>
+                <field name="quantity"/>
+            </tree>
+        </field>
+    </record>
+    <!--form view-->
+    <record id="view_data_form" model="ir.ui.view">
+        <field name="name">data.migration.form</field>
+        <field name="model">data.migration</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="id"/>
+                        <field name="company_id"/>
+                        <field name="partner_id"/>
+                        <field name="reconcile_id"/>
+                        <field name="credit"/>
+                        <field name="journal_id"/>
+                    </group>
+                    <group>
+                        <field name="state"/>
+                        <field name="debit"/>
+                        <field name="ref"/>
+                        <field name="account_id"/>
+                        <field name="period_id"/>
+                        <field name="date"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="move_id"/>
+                    <field name="name"/>
+                    <field name="tax_amount"/>
+                    <field name="product_id"/>
+                    <field name="account_tax_id"/>
+                    <field name="product_uom_id"/>
+                    <field name="amount_currency"/>
+                    <field name="quantity"/>
+                </group>
+            </form>
+        </field>
+    </record>
+    <!--We create action-->
+    <record id="data_action" model="ir.actions.act_window">
+        <field name="name">Data Migration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">data.migration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record!
+            </p>
+        </field>
+    </record>
+    <!-- Top menu item -->
+    <menuitem id="data_root"
+              name="Data Migration"
+              sequence="10"/>
+    <menuitem id="data_migration_root"
+              name="Data"
+              parent="data_root"
+              action="data_action"
+              sequence="2"/>
+
+    <menuitem id="invoice_migration_root"
+              name="Invoice Migration"
+              parent="data_root"
+              action="invoice_migration_action"
+              sequence="3"/>
+
+    <menuitem id="invoice_lines_migration_root"
+              name="Invoice Lines Migration"
+              parent="data_root"
+              action="invoice_lines_migration_action"
+              sequence="4"/>
+
+
+    <record id="complaint_migration_tree" model="ir.ui.view">
+        <field name="name">complaint.migration.tree</field>
+        <field name="model">complaint.migration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="x_id"/>
+                <field name="x_partner_id"/>
+                <field name="x_description"/>
+                <field name="x_stage_id"/>
+                <field name="x_user_id_issue"/>
+                <field name="x_contactperson"/>
+                <field name="x_responsibleperson"/>
+                <field name="x_additional"/>
+                <field name="x_payment"/>
+                <field name="x_payment_r"/>
+                <field name="x_create_uid"/>
+                <field name="x_create_date"/>
+            </tree>
+        </field>
+    </record>
+    <!--form view-->
+    <record id="complaint_migration_form" model="ir.ui.view">
+        <field name="name">complaint.migration.form</field>
+        <field name="model">complaint.migration</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="x_id"/>
+                    <field name="x_partner_id"/>
+                    <field name="x_description"/>
+                    <field name="x_stage_id"/>
+                    <field name="x_user_id_issue"/>
+                    <field name="x_contactperson"/>
+                    <field name="x_responsibleperson"/>
+                    <field name="x_additional"/>
+                    <field name="x_payment"/>
+                    <field name="x_payment_r"/>
+                    <field name="x_create_uid"/>
+                    <field name="x_create_date"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--We create action-->
+    <record id="complaint_action" model="ir.actions.act_window">
+        <field name="name">Data Migration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">complaint.migration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="complaint_migration_root"
+              name="Complaints Data"
+              parent="data_root"
+              action="complaint_action"
+              sequence="20"/>
+
+    <record id="sales_order_migration_tree" model="ir.ui.view">
+        <field name="name">sales.order.migration.tree</field>
+        <field name="model">sales.order.migration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="order_id"/>
+                <field name="partner_id"/>
+                <field name="order_reference"/>
+                <field name="delivery_address_id"/>
+                <field name="shipping_address_id"/>
+                <field name="sales_team_id"/>
+                <field name="warehouse_id"/>
+                <field name="sales_person_id"/>
+                <field name="validity"/>
+                <field name="price_list_id"/>
+                <field name="terms_and_conditions"/>
+            </tree>
+        </field>
+    </record>
+    <!--form view-->
+    <record id="sales_order_migration_form" model="ir.ui.view">
+        <field name="name">sales.order.migration.form</field>
+        <field name="model">sales.order.migration</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="order_id"/>
+                        <field name="partner_id"/>
+                        <field name="order_reference"/>
+                        <field name="delivery_address_id"/>
+                        <field name="shipping_address_id"/>
+                        <field name="sales_team_id"/>
+                        <field name="warehouse_id"/>
+                        <field name="sales_person_id"/>
+                        <field name="validity"/>
+                        <field name="price_list_id"/>
+                        <field name="terms_and_conditions"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--We create action-->
+    <record id="sales_order_migration_action" model="ir.actions.act_window">
+        <field name="name">Sales Order Migration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sales.order.migration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="sales_order_migration"
+              name="Sales Order"
+              parent="data_root"
+              action="sales_order_migration_action"
+              sequence="30"/>
+
+    <record id="sales_order_line_migration_tree" model="ir.ui.view">
+        <field name="name">sales.order.line.migration.tree</field>
+        <field name="model">sales.order.line.migration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="order_id"/>
+                <field name="description"/>
+                <field name="qty"/>
+                <field name="unit_price"/>
+                <field name="uom"/>
+                <field name="cost"/>
+                <field name="product_id"/>
+                <field name="order_lines_sequence"/>
+                <field name="order_line_id"/>
+                <field name="opportunity_id"/>
+            </tree>
+        </field>
+    </record>
+    <!--form view-->
+    <record id="sales_order_line_migration_form" model="ir.ui.view">
+        <field name="name">sales.order.migration.form</field>
+        <field name="model">sales.order.line.migration</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="order_id"/>
+                        <field name="description"/>
+                        <field name="qty"/>
+                        <field name="unit_price"/>
+                        <field name="uom"/>
+                        <field name="cost"/>
+                        <field name="product_id"/>
+                        <field name="order_lines_sequence"/>
+                        <field name="order_line_id"/>
+                        <field name="opportunity_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--We create action-->
+    <record id="sales_order_line_migration_action" model="ir.actions.act_window">
+        <field name="name">Sales Order Line Migration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sales.order.line.migration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="sales_order_migration_line"
+              name="Sales Order Line"
+              parent="data_root"
+              action="sales_order_line_migration_action"
+              sequence="40"/>
+
+
+    <record id="attendance_migration_tree" model="ir.ui.view">
+        <field name="name">attendance.migration.tree</field>
+        <field name="model">attendance.migration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="checkin"/>
+                <field name="checkout"/>
+                <field name="old_system_id"/>
+            </tree>
+        </field>
+    </record>
+    <!--form view-->
+    <record id="attendance_migration_form" model="ir.ui.view">
+        <field name="name">attendance.migration.form</field>
+        <field name="model">attendance.migration</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="checkin"/>
+                        <field name="checkout"/>
+                        <field name="old_system_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--We create action-->
+    <record id="attendance_migration_action" model="ir.actions.act_window">
+        <field name="name">Attendance Migration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">attendance.migration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first record!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="attendance_migration_line"
+              name="Attendance Migration"
+              parent="data_root"
+              action="attendance_migration_action"
+              sequence="50"/>
+</odoo>

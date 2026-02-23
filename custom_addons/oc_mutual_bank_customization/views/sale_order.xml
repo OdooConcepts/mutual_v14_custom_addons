@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_inherited_custom" model="ir.ui.view">
+        <field name="name">sale.order.inherit.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- related fields on sales order TASK # 07-->
+            <field name="partner_shipping_id" position="after">
+                <field name="cs_number_order" placeholder="CS Number"/>
+                <field name="branch_code_order" placeholder="Branch Code"/>
+                <field name="bank_code_order" placeholder="Bank Code"/>
+                <field name="complaint_ref_id" />
+                <field name="so_status" />
+            </field>
+            <field name='payment_term_id' position="after">
+                <field name="region_order"/>
+                  <field name="installation_date" />
+                <field name="dispatched_date" />
+            </field>
+
+        </field>
+    </record>
+</odoo>

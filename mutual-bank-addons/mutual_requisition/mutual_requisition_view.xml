@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <menuitem
+                name="Requisition"
+                id="main_menu_requisition"
+                sequence="11"
+                parent="helpdesk.menu_helpdesk_root"
+        />
+
+        <!-- Action for Requisition Slip -->
+        <record id="action_requisition_slip" model="ir.actions.act_window">
+            <field name="name">Requisition Slip</field>
+            <field name="res_model">mutual.requisition</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click create to add a new record</p>
+            </field>
+        </record>
+
+        <!-- Menu item for Requisition Slip -->
+        <menuitem id="menu_requisition_slip_open_project_attachment_view"
+                  name="Requisition Slip"
+                  parent="main_menu_requisition"
+                  action="action_requisition_slip"
+                  sequence="1"/>
+
+        <!-- View for Mutual Requisition form -->
+        <record id="view_form_mutual_req" model="ir.ui.view">
+            <field name="name">view.form.mutual.req</field>
+            <field name="model">mutual.requisition</field>
+            <field name="arch" type="xml">
+                <form string="Incharge Store">
+                    <header>
+                        <button name="validate" type="object" string="Validate" class="oe_highlight"/>
+                        <button name="cancel" type="object" string="Cancel" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"
+                               statusbar_colors='{"draft":"blue","confirmed":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <h1>Requisition Slip</h1>
+                        <group>
+                            <field name="req_type" attrs="{'readonly': [('state', '=', 'confirmed')]}"/>
+                        </group>
+                        <group>
+                            <field name="req_code" attrs="{'invisible': [('req_type','=','none')]}" />
+                            <field name="id" attrs="{'invisible': [('req_type','=','none')]}"/>
+                            <field name="title" attrs="{'invisible': [('req_type','=','none')], 'readonly': [('state', '=', 'confirmed')]}" />
+                        </group>
+                        <group>
+                            <field name="date" attrs="{'invisible': [('req_type','=','none')], 'readonly': [('state', '=', 'confirmed')]}"/>
+                        </group>
+                        <group>
+                            <field name="allow_req" attrs="{'invisible': [('req_type','=','none')]}" />
+                        </group>
+                        <notebook>
+                            <page string="Products" placeholder="Add a product" attrs="{'invisible': [('req_type','=','none')]}">
+                                <field name="products" attrs="{'invisible': [('req_type','=','none')]}" >
+                                    <tree editable="top">
+                                        <field name="courier_sheet_products"/>
+                                        <field name="type"/>
+                                        <field name="customer"/>
+                                        <field name="location"/>
+                                        <field name="cs_number"/>
+                                        <field name="branch_code"/>
+                                        <field name="status"/>
+                                        <field name="ref_to"/>
+                                        <field name="quantity"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- View for Mutual Requisition tree -->
+        <record id="view_tree_mutual_req" model="ir.ui.view">
+            <field name="name">view.tree.mutual.req</field>
+            <field name="model">mutual.requisition</field>
+            <field name="arch" type="xml">
+                <tree string="Requisition Slips List" default_order="date desc">
+                    <field name="req_code" string="Serial No."/>
+                    <field name="req_type"/>
+                    <field name="title"/>
+                    <field name="date"/>
+                    <field name="devices"/>
+                    <field name="ref"/>
+                    <field name="qty"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search view for Mutual Requisition -->
+        <record id="requisition_search_view" model="ir.ui.view">
+            <field name="name">requisition.search.view</field>
+            <field name="model">mutual.requisition</field>
+            <field name="arch" type="xml">
+                <search string="Requisition">
+                    <field name="req_code" string="Serial No."/>
+                    <field name="id"/>
+                    <field name="ref_two" string="CS Number"/>
+                    <field name="req_type"/>
+                    <field name="title"/>
+                    <field name="date"/>
+                    <field name="all_recipiant" string="Name in requisition"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

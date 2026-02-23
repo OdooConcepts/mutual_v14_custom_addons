@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="seq_oc_requisition" model="ir.sequence">
+            <field name="name">Requisition</field>
+            <field name="code">oc.requisition</field>
+            <field name="prefix">REQ</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</openerp>

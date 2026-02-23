@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+      <template id="invoice_report_inherit" inherit_id="account.report_invoice_document">
+          <xpath expr="//tr[@class='border-black o_subtotal']" position="replace">
+
+          </xpath>
+            <xpath expr="//p[@name='payment_communication']" position="after">
+                <span t-if="data"><h5>Outstanding Invoices</h5></span>
+                <table class="table table-sm o_main_table" t-if="data">
+                   <thead>
+                      <tr>
+                        <th name="th_date" class="text-left"><span>Date</span></th>
+                        <th name="th_invoice" class="text-left"><span>Invoice Number</span></th>
+                          <th name="th_expenditure_date" class="text-left"><span>Monitoring Period</span></th>
+                        <th name="th_amount" class="text-right">Amount</th>
+                     </tr>
+                   </thead>
+                    <tbody class="invoice_tbody">
+                        <t t-foreach="data" t-as="invoices">
+                            <tr>
+                                 <td>
+                                      <span t-esc="invoices['invoice_date']"/>
+                                 </td>
+                                <td>
+                                      <span t-esc="invoices['name']"/>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                         <span t-esc="monitoring_from"/> to <span t-esc="monitoring_to"/>
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                      <span t-esc="invoices['amount_residual']"/>
+                                </td>
+                            </tr>
+                        </t>
+                         <tr>
+                             <td></td>
+                             <td></td>
+                             <td >Subtotal</td>
+                             <td class="text-right"><span t-esc="'{0:,.2f}'.format(balance)"/></td>
+                   </tr>
+                         <tr>
+                             <td></td>
+                             <td></td>
+                             <td>Grand Total</td>
+                             <td class="text-right"><span t-esc="'{0:,.2f}'.format(total)"/></td>
+                   </tr>
+                    </tbody>
+                </table>
+
+            </xpath>
+     </template>
+<!--    <template id="sale_report_inherit" inherit_id="sale.report_saleorder_document">-->
+<!--          <xpath expr="//table[@class='table table-sm']/tr[@class='border-black o_total']" position="before">-->
+<!--              <t t-if="doc.discount_amount">-->
+<!--                  <tr>-->
+<!--                    <td name="td_amount_discount_label"><strong>Discount</strong></td>-->
+<!--                     <td name="td_amount_discount" class="text-right">-->
+<!--                          <span t-field="doc.discount_amount"/>-->
+<!--                     </td>-->
+<!--                   </tr>-->
+<!--              </t>-->
+<!--                    <t t-if="doc.discounted_amount">-->
+<!--                  <tr>-->
+<!--                    <td name="td_amount_discount_total_label"><strong>Discount</strong></td>-->
+<!--                     <td name="td_amount_discount_total" class="text-right">-->
+<!--                          <span t-field="doc.discounted_amount"/>-->
+<!--                     </td>-->
+<!--                   </tr>-->
+<!--              </t>-->
+<!--          </xpath>-->
+<!--     </template>-->
+<!--     <template id="monitoring_invoice_report_inherit" inherit_id="oc_mutual_residential.report_invoice_monitoring">-->
+<!--            <xpath expr="//div[@id='outstanding_invoices']" position="inside">-->
+<!--                <div style="margin-top:160px;">-->
+<!--                <span t-if="data"><h5>Outstanding Invoices</h5></span>-->
+<!--                <table class="table table-condensed" t-if="data">-->
+<!--                   <thead>-->
+<!--                      <tr>-->
+<!--                        <th name="th_date" class="text-left"><span>Date</span></th>-->
+<!--                        <th name="th_invoice" class="text-left"><span>Invoice Number</span></th>-->
+<!--                          <th name="th_expenditure_date" class="text-left"><span>Monitoring Period</span></th>-->
+<!--                        <th name="th_amount" class="text-right">Amount</th>-->
+<!--                     </tr>-->
+<!--                   </thead>-->
+<!--                    <tbody class="invoice_tbody">-->
+<!--                        <t t-foreach="data" t-as="invoices">-->
+<!--                            <tr>-->
+<!--                                 <td>-->
+<!--                                      <span t-esc="invoices['invoice_date']"/>-->
+<!--                                 </td>-->
+<!--                                <td>-->
+<!--                                      <span t-esc="invoices['name']"/>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <div class="row">-->
+<!--                                         <span t-esc="monitoring_from"/> to <span t-esc="monitoring_to"/>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--                                      <span t-esc="invoices['amount_residual']"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                         <tr>-->
+<!--                             <td></td>-->
+<!--                             <td></td>-->
+<!--                             <td >Subtotal</td>-->
+<!--                             <td class="text-right"><span t-esc="'{0:,.2f}'.format(balance)"/></td>-->
+<!--                   </tr>-->
+<!--                         <tr>-->
+<!--                             <td></td>-->
+<!--                             <td></td>-->
+<!--                             <td>Grand Total</td>-->
+<!--                             <td class="text-right"><span t-esc="'{0:,.2f}'.format(total)"/></td>-->
+<!--                   </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--             </div>-->
+<!--            </xpath>-->
+<!--     </template>-->
+<!--         <template id="monitoring_invoice_2_report_inherit" inherit_id="oc_mutual_residential.custom_mspl_invoice">-->
+
+<!--            <xpath expr="//div[@id='outstanding_invoices']" position="inside">-->
+<!--                 <div style="margin-top:260px;">-->
+<!--                <span t-if="data"><h5>Outstanding Invoices</h5></span>-->
+<!--                <table class="table table-condensed" t-if="data">-->
+<!--                   <thead>-->
+<!--                      <tr>-->
+<!--                        <th name="th_date" class="text-left"><span>Date</span></th>-->
+<!--                        <th name="th_invoice" class="text-left"><span>Invoice Number</span></th>-->
+<!--                          <th name="th_expenditure_date" class="text-left"><span>Monitoring Period</span></th>-->
+<!--                        <th name="th_amount" class="text-right">Amount</th>-->
+<!--                     </tr>-->
+<!--                   </thead>-->
+<!--                    <tbody class="invoice_tbody">-->
+<!--                        <t t-foreach="data" t-as="invoices">-->
+<!--                            <tr>-->
+<!--                                 <td>-->
+<!--                                      <span t-esc="invoices['invoice_date']"/>-->
+<!--                                 </td>-->
+<!--                                <td>-->
+<!--                                      <span t-esc="invoices['name']"/>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <div class="row">-->
+<!--                                         <span t-esc="monitoring_from"/> to <span t-esc="monitoring_to"/>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--                                      <span t-esc="invoices['amount_residual']"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                         <tr>-->
+<!--                             <td></td>-->
+<!--                             <td></td>-->
+<!--                             <td >Subtotal</td>-->
+<!--                             <td class="text-right"><span t-esc="'{0:,.2f}'.format(balance)"/></td>-->
+<!--                   </tr>-->
+<!--                         <tr>-->
+<!--                             <td></td>-->
+<!--                             <td></td>-->
+<!--                             <td>Grand Total</td>-->
+<!--                             <td class="text-right"><span t-esc="'{0:,.2f}'.format(total)"/></td>-->
+<!--                   </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--                 </div>-->
+<!--            </xpath>-->
+<!--              <xpath expr="//div[@id='outstanding_invoices1']" position="inside">-->
+<!--                   <div style="margin-top:260px;">-->
+<!--                <span t-if="data"><h5>Outstanding Invoices</h5></span>-->
+<!--                <table class="table table-condensed" t-if="data">-->
+<!--                   <thead>-->
+<!--                      <tr>-->
+<!--                        <th name="th_date" class="text-left"><span>Date</span></th>-->
+<!--                        <th name="th_invoice" class="text-left"><span>Invoice Number</span></th>-->
+<!--                          <th name="th_expenditure_date" class="text-left"><span>Monitoring Period</span></th>-->
+<!--                        <th name="th_amount" class="text-right">Amount</th>-->
+<!--                     </tr>-->
+<!--                   </thead>-->
+<!--                    <tbody class="invoice_tbody">-->
+<!--                        <t t-foreach="data" t-as="invoices">-->
+<!--                            <tr>-->
+<!--                                 <td>-->
+<!--                                      <span t-esc="invoices['invoice_date']"/>-->
+<!--                                 </td>-->
+<!--                                <td>-->
+<!--                                      <span t-esc="invoices['name']"/>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <div class="row">-->
+<!--                                         <span t-esc="monitoring_from"/> to <span t-esc="monitoring_to"/>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--                                      <span t-esc="invoices['amount_residual']"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                         <tr>-->
+<!--                             <td></td>-->
+<!--                             <td></td>-->
+<!--                             <td >Subtotal</td>-->
+<!--                             <td class="text-right"><span t-esc="'{0:,.2f}'.format(balance)"/></td>-->
+<!--                   </tr>-->
+<!--                         <tr>-->
+<!--                             <td></td>-->
+<!--                             <td></td>-->
+<!--                             <td>Grand Total</td>-->
+<!--                             <td class="text-right"><span t-esc="'{0:,.2f}'.format(total)"/></td>-->
+<!--                   </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--                   </div>-->
+<!--            </xpath>-->
+<!--     </template>-->
+</odoo>

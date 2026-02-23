@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_sales_summary">
+         <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <t t-set="total_sales" t-value="doc.new_sales()"/>
+                            <t t-set="total_active" t-value="0"/>
+                            <t t-set="total_inactive" t-value="0"/>
+                            <h1>Sales Summary</h1>
+                            <h6><span t-esc="doc.start_date"/> - <span t-esc="doc.end_date"/> </h6>
+                            <br/>
+                            <t t-if="doc.only_new_sales">
+                                <table class="table table-condensed" style="font-size:14px">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No.</th>
+                                            <th>Name</th>
+                                            <th>CS Number</th>
+                                            <th>Company</th>
+                                            <th>Total</th>
+                                            <th class="text-right">SO Reference</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="invoice_tbody">
+                                        <tr t-foreach="doc.new_sales()" t-as="l">
+                                            <td>
+                                                <span t-esc="l_index+1"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="l['customer']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="l['cs_number']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="l['company']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="round(l['amount_total'])"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="l['name']"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+                            <t t-if="doc.only_new_sales==False">
+                                <t t-set="total_uplink" t-value="0"/>
+                                <t t-set="total_active" t-value="0"/>
+                                <t t-set="total_inactive" t-value="0"/>
+                                <t t-set="total_accounts" t-value="0"/>
+                                <table class="table table-condensed" style="font-size:14px">
+                                    <t t-foreach="doc.get_data()" t-as="data">
+                                        <tr style="background:black; color:white;">
+                                            <th colspan="5">
+                                                <span t-esc="data['company']"/>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>CS Category</th>
+                                            <th>Uplink Accounts</th>
+                                            <th>Active Accounts</th>
+                                            <th>Disco Accounts</th>
+                                            <th class="text-right">Total Accounts</th>
+                                        </tr>
+                                        <t t-foreach="data['data']" t-as="record">
+                                            <tbody class="invoice_tbody">
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="record['code']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="record['uplink_customer']"/>
+                                                        <t t-set="total_uplink"
+                                                           t-value="total_uplink+record['uplink_customer']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="record['active_customer']"/>
+                                                        <t t-set="total_active"
+                                                           t-value="total_active+record['active_customer']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="record['inactive_customer']"/>
+                                                        <t t-set="total_inactive"
+                                                           t-value="total_inactive+record['inactive_customer']"/>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span t-esc="record['uplink_customer']+record['active_customer']+record['inactive_customer']"/>
+                                                        <t t-set="total_accounts"
+                                                           t-value="total_accounts+record['uplink_customer']+record['active_customer']+record['inactive_customer']"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </t>
+                                        <tr>
+                                            <td>
+                                                <b>Total</b>
+                                            </td>
+                                            <td>
+                                                <span t-esc="total_uplink"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="total_active"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="total_inactive"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="total_accounts"/>
+                                            </td>
+                                            <t t-set="total_uplink" t-value="0"/>
+                                            <t t-set="total_active" t-value="0"/>
+                                            <t t-set="total_inactive" t-value="0"/>
+                                            <t t-set="total_accounts" t-value="0"/>
+                                        </tr>
+                                        <tr>
+
+                                        </tr>
+                                    </t>
+                                </table>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+    </template>
+</odoo>

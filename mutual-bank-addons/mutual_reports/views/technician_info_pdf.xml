@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="technician_info_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="technician_info">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="row">
+                                <div t-if="technician_info.name">
+                                    <br/>
+                                    <h3>Technician's Information:</h3>
+                                    <strong>Name: </strong><span t-field="technician_info.name"/><br/>
+                                </div>
+                                <div t-if="technician_info.work_phone">
+                                    <strong>Contact Number: </strong><span t-field="technician_info.work_phone"/><br/>
+                                </div>
+                                <div t-if="technician_info.department_id">
+                                    <strong>Department: </strong><span t-field="technician_info.department_id.name"/><br/>
+                                </div>
+                                <div t-if="technician_info.work_location">
+                                    <strong>Region: </strong><span t-field="technician_info.work_location"/><br/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

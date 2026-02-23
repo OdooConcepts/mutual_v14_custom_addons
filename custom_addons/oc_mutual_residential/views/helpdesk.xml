@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_complaint_title_tree" model="ir.ui.view">
+        <field name="name">complaint.title.tree</field>
+        <field name="model">oc.complaint.title</field>
+        <field name="arch" type="xml">
+            <tree string="Complaint Titles">
+                <field name="complaint_title"/>
+            </tree>
+        </field>
+    </record>
+    <record id="oc_complaint_form" model="ir.ui.view">
+        <field name="name">Complaint Title Form</field>
+        <field name="model">oc.complaint.title</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="complaint_title" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_complaint_title" model="ir.actions.act_window">
+        <field name="name">Complaint Titles</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oc.complaint.title</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Complaint Titles
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Complaint Titles" action="action_complaint_title"
+              id="menu_action_complaint_title"
+              parent="helpdesk.helpdesk_menu_config" sequence="120"/>
+
+
+    <record id="helpdesk_inherited_form" model="ir.ui.view">
+        <field name="name">helpdesk.inherit.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="complaint_title" widget="selection"/>
+            </xpath>
+            <xpath expr="//div[@class='oe_title']" position="after">
+                <label for="other_complaint">Other Complaints</label>
+                <field name="other_complaint" widget="many2many_tags"/>
+                <br/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="contact_person" string="Contact Person"/>
+                <field name="responsible_person" string="Responsible Person"/>
+                <field name="create_date" string="Creation Date"/>
+            </xpath>
+            <xpath expr="//field[@name='create_date']" position="after">
+                <field name="create_uid" string="Logged By"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_name']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_email']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='email_cc']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='description']" position="after">
+                <notebook>
+                    <page string="Reconnection Remarks" groups="oc_mutual_residential.disco_remarks">
+                        <group>
+                            <group>
+                              <field name="date_of_next_invoice"/>
+                              <field name="start_date"/>
+                              <field name="end_date"/>
+                            </group>
+                            <group>
+                              <field name="is_period_change" widget="radio"/>
+                              <field name="reco_remarks"/>
+                              </group>
+                        </group>
+                    </page>
+                    <page string="TimeIn/Out">
+                        <field name="time_ids">
+                            <tree editable="top">
+                                <field name="technician_ids" widget="many2many_tags"/>
+                                <field name="time_in" widget="timesheet_uom"/>
+                                <field name="time_out" widget="timesheet_uom"/>
+                                <field name="total_time" widget="timesheet_uom"/>
+                                <field name="name"/>
+                                <field name="time_in_date" />
+                                <field name="create_date"/>
+                                <field name="is_timeout_computed" invisible="1"/>
+                                <field name="ticket_id" invisible="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="SMS" groups="oc_ufone_sms_api_integration.oc_sms_api_sms_page">
+                            <group>
+                            <field name="techContact"/>
+                            <field name="sms"/>
+                            <field name="count"/>
+                            <field name="sms_status" readonly="1"/>
+                            </group>
+                            <button name="details" string="Details" type="object" class="btn-link" />
+                            <button name="smsSent" string="Sent" type="object" class="btn-link"  />
+                        </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+    <record id="helpdesk_inherited_tree" model="ir.ui.view">
+        <field name="name">helpdesk.inherit.tree.custom</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+    <!--    <record id="helpdesk_kanban_create_inherited_form" model="ir.ui.view">-->
+    <!--        <field name="name">helpdesk.inherit.create.form</field>-->
+    <!--        <field name="model">helpdesk.ticket</field>-->
+    <!--        <field name="inherit_id" ref="helpdesk.quick_create_ticket_form"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//field[@name='name']" position="attributes">-->
+    <!--                <attribute name="attrs">{'invisible': True}</attribute>-->
+    <!--            </xpath>-->
+    <!--            <xpath expr="//field[@name='name']" position="after">-->
+    <!--                <br/>-->
+    <!--                <strong class="o_kanban_record_title">-->
+    <!--                    <label for="complaint_title">Complaint Title</label>-->
+    <!--                    <field name="complaint_title"/>-->
+    <!--                </strong>-->
+    <!--                <strong class="o_kanban_record_title">-->
+    <!--                    <label for="other_complaint">Other Complaints</label>-->
+    <!--                    <field name="other_complaint" widget="many2many_tags"/>-->
+    <!--                </strong>-->
+    <!--                <strong class="o_kanban_record_title">-->
+    <!--                    <label for="partner_id">Customer</label>-->
+    <!--                    <field name="partner_id"/>-->
+    <!--                </strong>-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <record id="helpdesk_kanban_inherited_kanban" model="ir.ui.view">
+        <field name="name">helpdesk.inherit.kanban</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <br/>
+                <field name="create_date"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="oc_complaint_timesheet" model="ir.ui.view">
+        <field name="name">Complaint Timesheet</field>
+        <field name="model">complaint.timesheet</field>
+        <field name="arch" type="xml">
+            <tree string="Timesheet List" editable="top">
+                <field name="cs_number"/>
+                <field name="ticket_id"/>
+                <field name="technician_ids" widget="many2many_tags"/>
+                <field name="time_in" widget="timesheet_uom"/>
+                <field name="time_out" widget="timesheet_uom"/>
+                <field name="total_time" widget="timesheet_uom"/>
+                <field name="name"/>
+                <field name="stage_id"/>
+                <field name="complaint_marker" optional="show"/>
+                <field name="time_in_date" optional="hide"/>
+                <field name="create_date" optional="hide"/>
+                <field name="is_timeout_computed" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="complaint_timesheet_form" model="ir.ui.view">
+        <field name="name">complaint.timesheet.form</field>
+        <field name="model">complaint.timesheet</field>
+        <field name="arch" type="xml">
+            <form string="Timesheet Form">
+                <sheet>
+                    <group>
+                        <field name="cs_number"/>
+                        <field name="ticket_id"/>
+                        <field name="technician_ids" widget="many2many_tags"/>
+                        <field name="stage_id"/>
+                        <field name="create_date"/>
+                    </group>
+                    <group>
+                        <field name="name"/>
+                        <field name="time_in"/>
+                        <field name="time_out"/>
+                        <field name="total_time"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_complaint_timesheet" model="ir.actions.act_window">
+        <field name="name">Tickets Timesheet</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">complaint.timesheet</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Timesheet
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="TimeIn/Out Activities"
+              action="action_complaint_timesheet"
+              id="menu_complaint_timesheet"
+              parent="helpdesk.helpdesk_ticket_menu_main" sequence="30"/>
+
+
+</odoo>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="report_issue_pdf_document1">
+              <t t-call="web.external_layout">
+                  <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <t t-set="address">
+                    <div>
+                       <div><h4>Customer's Information:</h4></div>
+                            <span t-field="o.partner_id"/><br/>
+                            <p t-field="o.partner_id.street"/>
+                    </div>
+                    <div class="row">
+                       <div class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id.mobile">
+                            <strong>Mobile:</strong>
+                            <p t-field="o.partner_id.mobile"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id.mobile">
+                            <strong>Phone:</strong>
+                            <p t-field="o.partner_id.phone"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id.cs_number">
+                            <strong>CS Number:</strong>
+                            <p t-field="o.partner_id.cs_number"/>
+                        </div>
+                    </div>
+                </t>
+                 <div class="page">
+                   <strong>Date of Print:</strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                <h4>
+                    <span>FEEDBACK PROFORMA</span><small><i>(For Technician)</i></small>
+                </h4>
+                <div class="row mt32 mb32">
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.user_id">
+                        <strong>Tech Name:</strong>
+                        <p t-field="o.user_id"/>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.id">
+                        <strong>Complaint ID:</strong>
+                        <p t-field="o.id"/>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.priority">
+                        <strong>Priority:</strong>
+                        <p t-field="o.priority"/>
+                    </div>
+                   <div class="col-auto col-3 mw-100 mb-2">
+                      <strong>Contact Person:</strong>
+                        <p t-field="o.contact_person"/>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.priority">
+                        <strong>Date:</strong>
+                        <span>______________</span>
+                    </div>
+                     <div class="col-auto col-3 mw-100 mb-2">
+                            <strong>Logged by</strong>
+                            <p t-field="o.create_uid"/>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.create_date">
+                            <strong>Logged date</strong>
+                            <p t-field="o.create_date"/>
+                    </div>
+                </div>
+                 <div>
+                    <h3>
+                    Complaint Type: <em><span t-field="o.name"/></em>
+                    </h3>
+                    <h3>
+                        <span t-foreach="o.other_complaint" t-as="compType">
+                             Other Complaint: <span t-field="compType.complaint_title"/>
+                        </span>
+                    </h3>
+                    <h4>
+                        <div t-if="o.description">
+                           <strong>Complaint Description: <span t-field="o.description"/></strong>
+                        </div>
+                    </h4>
+                 </div>
+
+                       <div class="row mt32 mb32" style="margin-left:4px;">
+                    <strong>Status of system:</strong>
+                    <span>___________________________________________________________________</span><br/><br/>
+                </div>
+                       <div class="row mt32 mb32" style="margin-left:4px;">
+                    <strong>Parts Replaced:</strong>
+                    <span>_____________________________________________________________________</span><br/><br/>
+                </div>
+                       <div class="row mt32 mb32" style="margin-left:4px;">
+                    <strong>To Be Charged:</strong>
+                    <span>GSM, PIR, TRANSFORMER, BATTERY, SIRON, SMOKE DETECTOR, PANIC BUTTONS AND WIRES </span><br/><br/>
+                </div>
+                       <div class="row mt32 mb32" style="margin-left:4px;">
+                    <strong>Any Other Remarks:</strong>
+                    <span>_____________________________________________________________________</span><br/><br/>
+                </div>
+
+                <!--<div class="col-xs-12" >-->
+                    <!--<strong>Complaint Description:</strong>-->
+                    <!--<span t-field="o.description"></span><br/>-->
+                <!--</div>-->
+                   <div class="row">
+                     <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                         <center><br/><br/><b>For Customers</b><br/>(With Stamp)<br/><br/></center>
+                       <table class="table table-sm">
+                              <tr class="o_subtotal" style="">
+                                  <td>
+                            <strong>Name:      </strong>
+                            <span>_____________________________________________</span><br/><br/>
+                            <strong>Sign:      </strong>
+                            <span>______________________________________________</span><br/><br/>
+                            <strong>Designation:</strong>
+                            <span>_______________________________________</span><br/><br/>
+                            <strong>Date:    </strong>
+                            <span>______________________________________________</span>
+                        </td>
+                              </tr>
+                         </table>
+                     </div>
+                   </div>
+                   </div>
+             </t>
+        </template>
+        <template id="report_issue_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-call="oc_mutual_residential.report_issue_pdf_document1" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

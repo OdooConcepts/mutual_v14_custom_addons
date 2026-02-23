@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_complaint_title_tree" model="ir.ui.view">
+        <field name="name">complaint.title.tree</field>
+        <field name="model">oc.complaint.title</field>
+        <field name="arch" type="xml">
+            <tree string="Complaint Titles">
+                <field name="complaint_title"/>
+            </tree>
+        </field>
+    </record>
+    <record id="oc_complaint_form" model="ir.ui.view">
+        <field name="name">Complaint Title Form</field>
+        <field name="model">oc.complaint.title</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="complaint_title" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_complaint_title" model="ir.actions.act_window">
+        <field name="name">Complaint Titles</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oc.complaint.title</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Complaint Titles
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Complaint Titles" action="action_complaint_title"
+              id="menu_action_complaint_title"
+              parent="helpdesk.helpdesk_menu_config" sequence="120"/>
+
+
+    <record id="oc_complaint_timesheet" model="ir.ui.view">
+        <field name="name">Complaint Timesheet</field>
+        <field name="model">complaint.timesheet</field>
+        <field name="arch" type="xml">
+            <tree string="Timesheet List" editable="top">
+                <field name="cs_number"/>
+                <field name="ticket_id"/>
+                <field name="technician_ids" widget="many2many_tags"/>
+                <field name="time_in" widget="float_time"/>
+                <field name="time_out" widget="float_time"/>
+                <field name="total_time" widget="float_time"/>
+                <field name="name"/>
+                <field name="stage_id"/>
+                <field name="create_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="complaint_timesheet_form" model="ir.ui.view">
+        <field name="name">complaint.timesheet.form</field>
+        <field name="model">complaint.timesheet</field>
+        <field name="arch" type="xml">
+            <form string="Timesheet Form">
+                <sheet>
+                    <group>
+                        <field name="cs_number"/>
+                        <field name="ticket_id"/>
+                        <field name="technician_ids" widget="many2many_tags"/>
+                        <field name="stage_id"/>
+                        <field name="create_date"/>
+                    </group>
+                    <group>
+                        <field name="name"/>
+                        <field name="time_in" widget="float_time"/>
+                        <field name="time_out" widget="float_time"/>
+                        <field name="total_time" widget="float_time"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_complaint_timesheet" model="ir.actions.act_window">
+        <field name="name">Tickets Timesheet</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">complaint.timesheet</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Timesheet
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="TimeIn/Out Activities"
+              action="action_complaint_timesheet"
+              id="menu_complaint_timesheet"
+              sequence="30" parent="helpdesk.helpdesk_ticket_menu_main"/>
+
+    <menuitem name="Miscellaneous"
+              id="menu_miscellaneous"
+              sequence="5" parent="helpdesk.helpdesk_ticket_menu_main"/>
+
+        <record id="action_so_courier_sheet" model="ir.actions.act_window">
+        <field name="name">SO/Courier Sheet</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="context"></field>
+        <field name="domain"></field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new quotation, the first step of a new sale!
+            </p>
+            <p>
+                You will be able to create an invoice and collect the payment.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="SO/Courier Sheet"
+              action="action_so_courier_sheet"
+              id="menu_so_courier_sheet"
+              sequence="31" parent="menu_miscellaneous"/>
+
+
+
+    <record id="helpdesk_inherited_form" model="ir.ui.view">
+        <field name="name">helpdesk.inherit.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet//div[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object" name="action_helpdesk_sms"
+                            icon="fa-pencil-square-o">
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="sms_count"/>
+                            </span>
+                            <span class="o_stat_text">View SMS</span>
+                        </div>
+                    </button>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="complaint_title" widget="selection"/>
+            </xpath>
+            <xpath expr="//div[@class='oe_title']" position="after">
+                <label for="other_complaint">Other Complaints</label>
+                <field name="other_complaint" widget="many2many_tags"/>
+                <br/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='team_id']" position="before">
+                <field name="complaint_source" placeholder="Complaint Source"/>
+                <field name="create_date" string="Creation Date"/>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_name']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_email']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='email_cc']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="client_name" placeholder="Client Name"/>
+                <field name="sale_order" placeholder="Sale Order" invisible="1"/>
+                <field name="cs_number" placeholder="CS Number"/>
+                <field name="branch_code" placeholder="Branch Code"/>
+                <field name="bank_code" placeholder="Bank Code"/>
+                <field name="city" placeholder="City"/>
+                <field name="bank_address" placeholder="Bank Address"/>
+            </xpath>
+
+            <!--Remarks-->
+            <xpath expr="//field[@name='description']" position="after">
+                <notebook>
+                    <page string="Remarks">
+                        <field name="ticket_remarks_ids">
+                            <tree editable="top">
+                                <field name="responsible_person"/>
+                                <field name="client"/>
+                                <field name="remarks"/>
+                                <field name="create_uid"/>
+                                <field name="create_date"/>
+                            </tree>
+                        </field>
+                    </page>
+
+                    <page string="Timesheet">
+                        <field name="time_ids">
+                            <tree editable="top">
+                                <field name="technician_ids" widget="many2many_tags"/>
+                                <field name="time_in" widget="float_time"/>
+                                <field name="time_out" widget="float_time"/>
+                                <field name="total_time" widget="float_time"/>
+                                <field name="name"/>
+                                <field name="create_date"/>
+                                <field name="ticket_id" invisible="1"/>
+                                <button name="action_send_sms" type="object" string="Send" class="oe_highlight"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Checking Criteria">
+                        <separator string="Zone Signals"/>
+                        <label for="zone1" string="Zone1" style="padding-right: 138px;"/>
+                        <field name="zone1"/>
+                        <br/>
+                        <label for="zone2" string="Zone2" style="padding-right: 138px;"/>
+                        <field name="zone2"/>
+                        <br/>
+                        <label for="zone3" string="Zone3" style="padding-right: 138px;"/>
+                        <field name="zone3"/>
+                        <br/>
+                        <label for="zone4" string="Zone4" style="padding-right: 138px;"/>
+                        <field name="zone4"/>
+                        <br/>
+                        <label for="zone5" string="Zone5" style="padding-right: 138px;"/>
+                        <field name="zone5"/>
+                        <br/>
+                        <label for="zone6" string="Zone6" style="padding-right: 138px;"/>
+                        <field name="zone6"/>
+                        <br/>
+                        <label for="zone7" string="Zone7" style="padding-right: 138px;"/>
+                        <field name="zone7"/>
+                        <br/>
+                        <label for="zone8" string="Zone8" style="padding-right: 138px;"/>
+                        <field name="zone8"/>
+                        <br/>
+                        <label for="zone9" string="Zone9" style="padding-right: 138px;"/>
+                        <field name="zone9"/>
+                        <br/>
+
+                        <separator string="Keypads Signals"/>
+                        <label for="panic" string="Panic" style="padding-right: 138px;"/>
+                        <field name="panic"/>
+                        <br/>
+                        <label for="duress" string="Duress" style="padding-right: 130px;"/>
+                        <field name="duress"/>
+                        <br/>
+                        <label for="medical" string="Medical" style="padding-right: 124px;"/>
+                        <field name="medical"/>
+                        <br/>
+                        <label for="fire" string="Fire" style="padding-right: 148px;"/>
+                        <field name="fire"/>
+                        <br/>
+                        <group string="BS Connected to">
+                            <group>
+                                <field name="gms_bental"/>
+                                <field name="ptcl" placeholder="PTCL"/>
+                                <field name="response_check"/>
+                                <field name="check_by_client" placeholder="Check By Client"/>
+                            </group>
+                            <group>
+                                <field name="gsm_prepaid_postpaid" placeholder="Gsm Prepaid Postpaid"/>
+                                <field name="ptcl_dedicated_shared" placeholder="PTCL Dedicated Shared"/>
+                            </group>
+                        </group>
+                    </page>
+
+                </notebook>
+
+
+            </xpath>
+
+        </field>
+    </record>
+
+
+</odoo>

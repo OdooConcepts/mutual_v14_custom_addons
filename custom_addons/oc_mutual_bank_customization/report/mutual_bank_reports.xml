@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_report_customer_inventory" model="ir.actions.report">
+            <field name="name">Inventory Reports</field>
+            <field name="model">inventory.report.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">oc_mutual_bank_customization.report_customer_inventory</field>
+            <field name="report_file">oc_mutual_bank_customization.report_customer_inventory</field>
+            <field name="binding_model_id" ref="model_inventory_report_wizard"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_technician_inventory" model="ir.actions.report">
+            <field name="name">Inventory Reports</field>
+            <field name="model">inventory.report.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">oc_mutual_bank_customization.report_technician_inventory</field>
+            <field name="report_file">oc_mutual_bank_customization.report_technician_inventory</field>
+            <field name="binding_model_id" ref="model_inventory_report_wizard"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Template definition -->
+        <template id="custom_sales_tax_invoice" inherit_id="sale.layout">
+            <xpath expr="//div[@class='row']/strong" position="replace">
+                <h1 align="center">INVOICE</h1>
+                <br/>
+                <div style="font-size:12px;width:400px;display:inline-block; padding:10px;border-radius:10px;">
+                    <strong style="font-size:14px;">
+                        <span t-field="o.partner_id.name"/><br/>
+                        <span t-if="o.partner_id.branch_code">
+                            BC-<span t-field="o.partner_id.branch_code"/>
+                        </span><br/>
+                        <span t-if="o.partner_id.street">
+                            <span t-field="o.partner_id.street"/><br/>
+                        </span>
+                        <span t-if="o.partner_id.street2">
+                            <span t-field="o.partner_id.street2"/><br/>
+                        </span>
+                        <span t-if="o.partner_id.city">
+                            <span t-field="o.partner_id.city"/><br/>
+                            <span t-if="o.partner_id.office">
+                                <span t-field="o.partner_id.office"/><br/>
+                            </span>
+                            <span t-if="o.partner_id.phone">
+                                <span t-field="o.partner_id.phone"/><br/>
+                            </span>
+                            <span t-if="o.partner_id.mobile">
+                                <span t-field="o.partner_id.mobile"/><br/>
+                            </span>
+                        </span>
+                        <br/><br/>
+                        <span t-if="not o.hide_cust_ntn_strn_no">
+                            <span t-if="o.partner_id.cus_ntn_no">
+                                NTN No. <span t-field="o.partner_id.cus_ntn_no"/><br/>
+                            </span>
+                            <span t-if="o.partner_id.cus_strn_no">
+                                STRN No. <span t-field="o.partner_id.cus_strn_no"/><br/>
+                            </span>
+                        </span>
+                    </strong>
+                </div>
+                <div style="font-size:12px; width:400px;float:right;display:inline-block; padding:10px;border-radius:10px;">
+                    <strong style="font-size:14px;">
+                        <span t-if="o.invoice_no_reference">
+                            <span t-field="o.invoice_no_reference"/><br/>
+                        </span>
+                        <span t-if="o.invoice_date">
+                            <span t-field="o.invoice_date"/><br/>
+                        </span>
+                        <span t-if="not o.hide_mutual_strn_no">
+                            NTN: 3764757-1<br/>
+                        </span>
+                        <span t-if="not o.hide_mutual_ntn_no">
+                            STN: 17-00-3764-757-19<br/>
+                        </span>
+                        <br/><br/>
+                        <span t-if="not o.hide_purchase_order_detail">
+                            <span t-if="o.purchase_order_no">
+                                PO No. <span t-field="o.purchase_order_no"/><br/>
+                            </span>
+                            <span t-if="o.purchase_order_Date">
+                                PO Date <span t-field="o.purchase_order_Date"/><br/>
+                            </span>
+                        </span>
+                    </strong>
+                </div>
+            </xpath>
+
+            <xpath expr="//div[@class='row mt32 mb32']" position="replace">
+                <div style="font-size:16px; width:100%;display:inline-block; padding:10px;border-radius:10px;">
+                    <strong>Subject: </strong>
+                    <span t-field="o.invoice_subject"/>,
+                    <span t-if="o.origin">
+                        <span t-esc="o.fetch_previous_rec(o.origin)"/><br/>
+                    </span>
+                    <span t-if="not o.origin">
+                        <span t-field="o.partner_id.street"/> (BC-<span t-field="o.partner_id.branch_code"/>)
+                        <br/>
+                    </span>
+                </div>
+            </xpath>
+
+            <xpath expr="//h3" position="replace">
+                <br/>
+            </xpath>
+
+            <xpath expr="//span[@t-field='l.name']" position="replace">
+                <span t-if="l.name != 'Monitoring charges'">
+                    <span t-field="l.name"/>
+                </span>
+                <span t-if="l.name == 'Monitoring charges'">
+                    <span t-field="l.name"/> for period of <span t-field="o.from"/> to <span t-field="o.to"/>
+                </span>
+            </xpath>
+
+            <xpath expr="//td[@class='text-right']/span[@t-field='l.price_unit']" position="after">
+                <td></td>
+            </xpath>
+
+            <xpath expr="//p[@t-if='o.fiscal_position.note']" position="after">
+                <br/>
+                <strong>Best Regards,</strong>
+                <br/><br/><br/>
+                <strong>Anwar Zeb</strong>
+            </xpath>
+
+            <xpath expr="//div[@class='row']/div[@class='col-xs-4 pull-right']" position="replace">
+                <div class="row">
+                    <div class="col-xs-4 pull-right">
+                        <table class="table table-condensed">
+                            <tr class="border-black" t-if="o.show_tax">
+                                <td><strong>Total Without Taxes</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_untaxed" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                </td>
+                            </tr>
+                            <tr t-if="o.show_tax">
+                                <td>Taxes</td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_tax" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                </td>
+                            </tr>
+                            <tr class="border-black" t-if="o.show_tax">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_total" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                </td>
+                            </tr>
+                            <tr t-if="not o.show_tax">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_total" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

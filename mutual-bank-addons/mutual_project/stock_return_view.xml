@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--========================================================= Child Menu of Parent MenuItem for Courier Sheet Begins ================================================-->
+    <record id="action_stock_return_sheet" model="ir.actions.act_window">
+        <field name="name">Stock Return Sheet</field>
+        <field name="res_model">stock.return</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data yet!
+            </p>
+            <p>
+                Create a new record
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            name="Stock Return Sheet"
+            action="action_stock_return_sheet"
+            id="menu_stock_return_sheet"
+            sequence="40"
+            parent="menu_misc_operations"/>
+    <!--========================================================= Child Menu of Parent MenuItem for Courier Sheet End ================================================-->
+    <!--========================================================= Stock Return Form view Begins ================================================-->
+    <record id="stock_return_sheet_form_view" model="ir.ui.view">
+        <field name="name">stock_return_sheet.form.view</field>
+        <field name="model">stock.return</field>
+        <field name="arch" type="xml">
+            <form string="Stock Return Sheet">
+                <sheet>
+                    <group string="Stock Return Sheet">
+                        <group>
+                            <field name="id" readonly="1"/>
+                            <field name="title"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products">
+                            <field name="products" colspan="4" nolabel="1">
+                                <tree editable="top" string="Items">
+                                    <field name="products" required="True"/>
+                                    <field name="product_type" required="True"/>
+                                    <field name="quantity" required="True"/>
+                                    <field name="customer" string="Bank Depart/Tech/Customer"/>
+                                    <field name="cs_number"/>
+                                    <field name="req_ref" required="True"/>
+                                    <field name="ref_to"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--========================================================= Stock Return Form view End ================================================-->
+
+    <!--========================================================= Tree view start ================================================-->
+    <record id="stock_return_sheet_tree_view" model="ir.ui.view">
+        <field name="name">stock_return_sheet.tree.view</field>
+        <field name="model">stock.return</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Return Sheet">
+                <field name="title"/>
+                <field name="date"/>
+                <field name="req_slip_ref" type="char"/>
+            </tree>
+        </field>
+    </record>
+    <!--========================================================= Tree view end ================================================-->
+
+    <!--========================================================= Search view start ================================================-->
+    <record id="stock_return_sheet_search_view" model="ir.ui.view">
+        <field name="name">stock_return_sheet.search.view</field>
+        <field name="model">stock.return</field>
+        <field name="arch" type="xml">
+            <search string="Stock Return Sheet">
+                <field name="title"/>
+                <field name="date"/>
+                <field name="req_slip_ref"/>
+                <field name="ref_two" string="CS Number"/>
+                <field name="ref" string="Customer"/>
+            </search>
+        </field>
+    </record>
+    <!--========================================================= Search view end ================================================-->
+</odoo>

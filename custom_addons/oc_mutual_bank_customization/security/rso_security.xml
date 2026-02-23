@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.module.category" id="module_oc_mutual_bank_category">
+                <field name="name">Mutual Bank</field>
+                <field name="sequence">0</field>
+        </record>
+           <record id="group_rso_low_battery" model="res.groups">
+            <field name="name">RSO</field>
+            <field name="category_id" ref="module_oc_mutual_bank_category"/>
+        </record>
+    </data>
+</openerp>

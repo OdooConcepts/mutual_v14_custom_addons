@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="inherit_account_view_move_form">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_date']" position="after">
+                    <label for="from_date" string="Monitoring Period"
+                           attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"/>
+                    <div class="d-flex"
+                         attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}">
+                        <field name="from_date" force_save="1" placeholder="Date From"
+                               attrs="{'invisible': [('invoice_payment_term_id', '!=', False)]}"/>
+                        <span class="o_form_label mx-3 oe_edit_only">
+                            -
+                        </span>
+                        <field name="to_date" placeholder="Date To"/>
+                    </div>
+
+                </xpath>
+                <xpath expr="//div[@name='journal_div']" position="after">
+                    <field name="create_uid"/>
+                    <field name="create_date"/>
+                </xpath>
+
+                <field name="partner_id" position="after">
+                    <field name="ntn"/>
+                    <field name="bank_cs_invoice"/>
+                    <field name="bank_code_invoice"/>
+                    <field name="branch_code_invoice"/>
+                    <!--<field name="round_amount"/>-->
+                </field>
+                <xpath expr="//page/field/tree/field[@name='product_id']" position="after">
+                    <field name="effect_on_inventory"/>
+                </xpath>
+                <!--<xpath expr="//field[@name='address_criteria']" position="after">-->
+                <!--<field name="pay_remarks"/>-->
+                <!--</xpath>-->
+                <xpath expr="//page[@name='other_info']" position="after">
+                    <page string="Payment and Collections" name="follow_ups">
+                        <group string="Payment Information">
+                            <group>
+                                <field name="courier"/>
+                                <field name="payment_received"/>
+                                <field name="po_dd" attrs="{'invisible': [('payment_received','=',False)]}"/>
+                                <field name="cheque_no" attrs="{'invisible': [('payment_received','=',False)]}"/>
+                                <field name="cheque_date" attrs="{'invisible': [('payment_received','=',False)]}"/>
+                                <field name="cheque_date_customer"
+                                       attrs="{'invisible': [('payment_received','=',False)]}"/>
+                            </group>
+                            <group>
+                                <field name="actual_amount" attrs="{'invisible': [('payment_received','=',False)]}" string="Payment Received Amount"/>
+                                <field name="invoice_no_reference"/>
+                                <field name="purchase_order_no"/>
+                                <field name="purchase_order_Date"/>
+                                <field name="invoice_subject"/>
+                            </group>
+                        </group>
+                        <group string="Follow-ups">
+                            <field name="first_call"/>
+                            <field name="next_call"/>
+                            <field name="remarks"/>
+                        </group>
+                    </page>
+                    <page string="Invoice Properties">
+                        <group>
+                            <field name="show_tax"/>
+                            <field name="hide_purchase_order_detail"/>
+                            <field name="hide_cust_ntn_strn_no"/>
+                            <field name="hide_mutual_strn_no"/>
+                            <field name="hide_mutual_ntn_no"/>
+                        </group>
+                    </page>
+                    <page string="Invoice Details">
+                        <group>
+                            <group>
+                                <field name="maintenance_amount"/>
+                                <field name="installation_amount"/>
+                            </group>
+                            <group>
+                                <field name="product_line" readonly="1"/>
+                                <field name="product_sales_amount"/>
+                                <field name="sales_tax"/>
+                                <field name="total_product_amount"/>
+                            </group>
+                            <group>
+                                <field name="monitoring_sales_amount"/>
+                                <field name="srb_tax"/>
+                                <field name="total_monitoring_amount"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <!--                <xpath expr="//field[@name='date_invoice']" position="attributes">-->
+                <!--                    <attribute name="string">Validation Date</attribute>-->
+                <!--                </xpath>-->
+                <xpath expr="//field[@name='fiscal_position_id']" position="after">
+                    <field name="pay_remarks"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="inherit_account_view_move_tree" model="ir.ui.view">
+            <field name="name">Account Move Tree</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="arch" type="xml">
+                <field name="date" position="after">
+                    <field name="courier"/>
+                    <field name="payment_received"/>
+                </field>
+                <field name="partner_id" position="after">
+                    <field name="bank_name"/>
+                    <field name="bank_cs_invoice"/>
+                    <field name="bank_code_invoice"/>
+                    <field name="branch_code_invoice"/>
+                    <field name="invoice_date"/>
+                </field>
+            </field>
+        </record>
+        <!--==========================Search View=============================-->
+        <record model="ir.ui.view" id="inherit_account_view_account_invoice_filter">
+            <field name="name">Account Move</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/field[@name='name']" position="before">
+                    <field name="bank_cs_invoice"/>
+                    <field name="branch_code_invoice"/>
+                    <field name="id"/>
+                    <field name="bank_code_invoice"/>
+                    <field name="cheque_no"/>
+                </xpath>
+                <search string="Search Invoice">
+                    <group string="Group By">
+                        <filter name="courier" string="Couriered" domain="[('courier','=',True)]"/>
+                        <filter name="courier" string="Not Couriered" domain="[('courier','=',False)]"/>
+                        <filter name="payment_received" string="Payment Received"
+                                domain="[('payment_received','=',True)]"/>
+                        <filter name="payment_received" string="Payment Not Received"
+                                domain="[('payment_received','=',False)]"/>
+                    </group>
+                    <group string="Head Office">
+                        <filter name="bank_cs_invoice" string="Main Branch" domain="[('bank_cs_invoice','=',False)]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--        <record id="action_summary_sheet" model="ir.actions.act_window">-->
+        <!--            <field name="name">Summary Sheet</field>-->
+        <!--            <field name="res_model">summary.sheet</field>-->
+        <!--            <field name="view_mode">tree,form</field>-->
+        <!--            <field name="help" type="html">-->
+        <!--                <p class="oe_view_nocontent_create">click create to add a new record</p>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--        <menuitem-->
+        <!--                name="Summary Sheet"-->
+        <!--                action="action_summary_sheet"-->
+        <!--                id="menu_summary_sheet"-->
+        <!--                sequence="100"-->
+        <!--                parent="account_accountant.menu_accounting">-->
+        <!--        </menuitem>-->
+        <!--        <record id="summary_sheet_billing" model="ir.ui.view">-->
+        <!--            <field name="name">summary_sheet.form.view</field>-->
+        <!--            <field name="model">summary.sheet</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <form string="Summary Sheet">-->
+        <!--                    <sheet>-->
+        <!--                        <group>-->
+        <!--                            <field name="customer"/>-->
+        <!--                            <field name="sale_tax"/>-->
+        <!--                            <field name="maintenance_charges"/>-->
+        <!--                            <field name="total" readonly="1"/>-->
+        <!--                        </group>-->
+        <!--                        <group string="Summary Sheet">-->
+        <!--                            <field name="summary_sheet" colspan="4" nolabel="1">-->
+        <!--                                <tree editable="top" string="Summary Sheets">-->
+        <!--                                    <field name="cs_number"/>-->
+        <!--                                    <field name="branch_code"/>-->
+        <!--                                    <field name="address1"/>-->
+        <!--                                    <field name="address2"/>-->
+        <!--                                    <field name="from"/>-->
+        <!--                                    <field name="to"/>-->
+        <!--                                    <field name="service_period"/>-->
+        <!--                                    <field name="basic_amount"/>-->
+        <!--                                    <field name="maintenance_basic_amount"/>-->
+        <!--                                    <field name="total_moni"/>-->
+        <!--                                    <field name="total_ment"/>-->
+        <!--                                    <field name="sales_tax"/>-->
+        <!--                                    <field name="sales_tax_amount"/>-->
+        <!--                                    <field name="total_amount_ex_sales_tax"/>-->
+        <!--                                    <field name="total_amount_with_sales_tax"/>-->
+        <!--                                </tree>-->
+        <!--                            </field>-->
+        <!--                        </group>-->
+        <!--                    </sheet>-->
+        <!--                </form>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--        <record model="ir.ui.view" id="summary_sheet_activities">-->
+        <!--            <field name="name">Summary Sheet</field>-->
+        <!--            <field name="model">summary.sheet</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <tree string="Summary Sheet">-->
+        <!--                    <field name="customer"/>-->
+        <!--                </tree>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!--        <record id="account_invoice_open_attachment_view" model="ir.actions.act_window">-->
+        <!--            <field name="name">Follow Ups</field>-->
+        <!--            <field name="res_model">account.invoice</field>-->
+        <!--            <field name="view_type">form</field>-->
+        <!--            <field name="view_mode">tree,form</field>-->
+        <!--            <field name="help" type="html">-->
+        <!--                <p class="oe_view_nocontent_create">click create to add a new record</p>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--        <record id="followup_invoice_tree_view" model="ir.ui.view">-->
+        <!--            <field name="name">followup_invoices.tree.view</field>-->
+        <!--            <field name="model">account.invoice</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <tree string="Followup Invoice Tree" colors="orange:first_call!=False" version="8.0">-->
+        <!--                    <field name="id" string="Inv.No."/>-->
+        <!--                    <field name="bank_code_invoice"/>-->
+        <!--                    <field name="branch_code_invoice"/>-->
+        <!--                    <field name="bank_cs_invoice"/>-->
+        <!--                    <field name="invoice_date"/>-->
+        <!--                    <field name="first_call"/>-->
+        <!--                    <field name="next_call"/>-->
+        <!--                    <field name="remarks"/>-->
+        <!--                    <field name="amount_total"/>-->
+        <!--                    <field name="state"/>-->
+        <!--                </tree>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--        <record id="action_new_tree" model="ir.actions.act_window.view">-->
+        <!--            <field eval="1" name="sequence"/>-->
+        <!--            <field name="view_mode">tree</field>-->
+        <!--            <field name="view_id" ref="followup_invoice_tree_view"/>-->
+        <!--            <field name="act_window_id" ref="account_invoice_open_attachment_view"/>-->
+        <!--        </record>-->
+        <!--        <record id="action_new_form" model="ir.actions.act_window.view">-->
+        <!--            <field eval="1" name="sequence"/>-->
+        <!--            <field name="view_mode">form</field>-->
+        <!--            <field name="view_id" ref="cs_id"/>-->
+        <!--            <field name="act_window_id" ref="account_invoice_open_attachment_view"/>-->
+        <!--        </record>-->
+        <!--        <menuitem-->
+        <!--                name="Follow-Ups"-->
+        <!--                action="account_invoice_open_attachment_view"-->
+        <!--                id="menu_account_invoice_open_attachment_view"-->
+        <!--                sequence="100"-->
+        <!--                parent="account.menu_finance_receivables">-->
+        <!--        </menuitem>-->
+    </data>
+</odoo>

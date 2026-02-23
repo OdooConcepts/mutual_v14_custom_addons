@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_technician_inventory">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <h2>Technician Inventory Report</h2><br/><br/>
+                            <t t-foreach="doc.fetch_record()" t-as="item">
+                                <div style="font-size:12px;width:550px;display:inline-block;">
+                                    <div style="border:2px solid grey; padding:10px;border-radius:10px;">
+                                        <strong style="font-size:18px">Technician's Information:</strong><br/>
+                                        <strong style="font-size:14px"><span t-esc="item['name']" /></strong><br/>
+                                        <strong style="font-size:14px"><span t-esc="item['designation']" /></strong><br/>
+                                        <strong style="font-size:14px"><span t-esc="item['city']" /></strong><br/>
+                                        <strong style="font-size:14px"><span t-esc="item['address']" /></strong><br/>
+                                    </div>
+                                </div><br/><br/>
+                                <table class="table table-condensed" style="font-size:14px">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Product Name</th>
+                                            <th>Product Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="invoice_tbody">
+                                        <tr t-foreach="item['items']" t-as="prod">
+                                            <td>
+                                                <span t-esc="prod['product_id']" />
+                                            </td>
+                                            <td>
+                                                <span t-esc="prod['name_template']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="prod['qty']"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table><br/><br/><br/>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

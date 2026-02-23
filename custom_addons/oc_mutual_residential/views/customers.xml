@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+<record id="partner_inherited_form" model="ir.ui.view">
+                <field name="name">res.partner.inherit.form</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='name']" position="after">
+                        <br/>
+                       <field name="cs_category" placeholder="CS Category"/>
+                        <br/>
+                       <field name="cs_number" placeholder="CS Number" attrs="{'invisible': [('cs_category', '=', False)]}"/>
+                        <br/>
+                        <field name="uplink_date" placeholder="Up Link Date"/>
+                      </xpath>
+                    <xpath expr="//field[@name='category_id']" position="after">
+                       <field name="is_application_user"/>
+                    </xpath>
+                    <xpath expr="//field[@name='vat']" position="after">
+                        <field name="nic_num"/>
+                        <field name="contact_person"/>
+                        <field name="contact_person_details"/>
+                        <field name="temp_address"/>
+                    </xpath>
+                     <xpath expr="//field[@name='vat']" position="attributes">
+                        <attribute name="groups">oc_mutual_residential.ntn_group</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='property_account_payable_id']" position="after">
+                        <br/>
+                        <br/>
+                        <field name="gst_num"/>
+                        <field name="credit_card_no"/>
+                        <field name="credit_card_exp_date"/>
+                    </xpath>
+                     <field name="function" position="after">
+                        <field name="office"/>
+                     </field>
+                     <xpath expr="//form/sheet/group" position="after">
+                       <group>
+                         <label for="c_street" string="Correspondence Address"></label>
+                         <div class="address_format">
+                           <field name="c_street" placeholder="Street..."/>
+                         <field name="c_street2" placeholder="Street2..."/>
+                         <field name="c_city" placeholder="City..."/>
+                         </div>
+
+                       </group>
+                     </xpath>
+                </field>
+                </record>
+
+     <record id="Partner_line_inherited" model="ir.ui.view">
+                <field name="name">partner.line.inherit.tree</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="base.view_partner_tree"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//tree/field[@name='user_id']" position="after">
+                          <field name="cs_number"/>
+                        <field name="uplink_date"/>
+                          <field name="is_application_user"/>
+                      </xpath>
+                </field>
+                </record>
+
+
+</odoo>

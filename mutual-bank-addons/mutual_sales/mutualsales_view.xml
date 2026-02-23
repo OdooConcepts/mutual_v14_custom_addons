@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Extension of res.partner form view -->
+        <record id="res_partner_form_view_extension" model="ir.ui.view">
+            <field name="name">res.partner.form.extension</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//h1" position="after">
+                    <h2>
+                        <field name="cs_number" placeholder="CS Number" class="oe_inline"/>
+                        <br/>
+                        <field name="branch_code" placeholder="Branch Code" class="oe_inline"/>
+                        <br/>
+                        <field name="bank_code" placeholder="Bank Code" class="oe_inline"/>
+                        <br/>
+                        <field name="uplink_date" placeholder="Uplink Date" class="oe_inline"/>
+                        <br/>
+                    </h2>
+                </xpath>
+                <field name="title" position="after">
+                    <field name="sim_type" class="oe_inline"/>
+                    <field name="network_type" class="oe_inline" attrs="{'invisible': [('sim_type','=',False)]}"/>
+                    <field name="sim_number" class="oe_inline" attrs="{'invisible': [('network_type','=',False)]}"/>
+                    <field name="is_employee" class="oe_inline"/>
+                    <field name="is_technician" class="oe_inline"/>
+                    <field name="is_rider" class="oe_inline"/>
+                    <field name="customer_visit"/>
+                </field>
+                <field name="function" position="after">
+                    <field name="office"/>
+                </field>
+                <field name="office" position="attributes">
+                    <attribute name="string">PTCL1</attribute>
+                </field>
+                <field name="phone" position="attributes">
+                    <attribute name="string">PTCL2</attribute>
+                </field>
+                <!--                <label for="street" string="Address" position="replace">-->
+                <!--                    <label for="street" string="Monitoring Address" />-->
+                <!--                </label>-->
+                <xpath expr="//form/sheet/group" position="after">
+                    <br/>
+                    <separator string="Other Contacts"/>
+                    <group>
+                        <field name="customer_relatives" colspan="4" nolabel="1">
+                            <tree editable="top" string="Relative">
+                                <field name="other"/>
+                                <field name="relationship"/>
+                                <field name="contact_1"/>
+                                <field name="contact_2"/>
+                                <field name="sms_alert"/>
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='mobile']" position="after">
+                    <field name="rf_id"/>
+                    <field name="force_code"/>
+                </xpath>
+                <xpath expr="//field[@name='title']" position="after">
+                    <field name="cus_ntn_no"/>
+                    <field name="cus_strn_no"/>
+                    <field name="parent"/>
+                </xpath>
+                <xpath expr="//field[@name='country_id']" position="before">
+                    <field name="region"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Extension of res.partner search view -->
+        <record id="res_partner_search_view_extension" model="ir.ui.view">
+            <field name="name">res.partner.select.extension</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/field[@name='name']" position="before">
+                    <field name="cs_number"/>
+                    <field name="branch_code"/>
+                    <field name="bank_code"/>
+                    <field name="rf_id"/>
+                    <field name="force_code"/>
+                    <field name="mobile"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <field name="payment_responsible_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- List view extension for customer form -->
+        <record id="res_partner_tree_view_extension" model="ir.ui.view">
+            <field name="name">res.partner.tree.extension</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <field name="phone" position="after">
+                    <field name="cs_number"/>
+                    <field name="branch_code"/>
+                    <field name="city"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

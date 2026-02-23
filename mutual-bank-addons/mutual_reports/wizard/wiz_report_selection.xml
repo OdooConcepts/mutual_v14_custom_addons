@@ -1,0 +1,36 @@
+<openerp>
+    <data>
+       <!-- ================================================== Begin Form views of Report Wizard ================================================ -->
+        <record id="wiz_report_select" model="ir.ui.view">
+            <field name="name">view</field>
+            <field name="model">wiz.report.selection</field>
+            <field name="arch" type="xml">
+                <form string="Report Selection" version="8.0">
+                    <group>
+                        <field name="select" string="Select Report Type"/>
+                    </group>
+                    <group>
+                        <field name="report_name" invisible="1" />
+                        <field name="report" filename="report_name" colspan="4"/>
+<!--                        <field name="data_invoice" string="data invoice"  />-->
+                    </group>
+                    <footer>
+                            <button name="select_report_type" string="Print Report" type="object" class="oe_highlight" />
+                            OR
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+         ================================================== End Form views of Report Wizard ================================================
+        <record id="wiz_report_select_action" model="ir.actions.act_window">
+            <field name="name">Report selection</field>
+            <field name="res_model">wiz.report.selection</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wiz_report_select"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>
+<!-- context="{'default_data_invoice':data_invoice.active_id}"-->

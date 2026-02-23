@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_oc_requisition_tree" model="ir.ui.view">
+        <field name="name">oc.requisition.tree</field>
+        <field name="model">oc.requisition</field>
+        <field name="arch" type="xml">
+            <tree string="Requisition Slip">
+                <field name="requisition_type"/>
+            </tree>
+        </field>
+    </record>
+    <record id="oc_requisition_slip_form" model="ir.ui.view">
+        <field name="name">Requisition Slip Form</field>
+        <field name="model">oc.requisition</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button type="object" name="action_confirmed" string="Confirmed" class="oe_highlight"
+                            attrs="{'invisible': [('state', 'in', ['cancel','confirmed'])]}"
+                    />
+                    <button type="object" name="action_cancel" string="Cancel" class="oe_highlight"
+                            attrs="{'invisible': [('state', 'in', ['cancel','confirmed'])]}"
+                    />
+                    <field name="state" widget="statusbar"
+                           attrs="{'readonly': [('state', 'in', ['cancel','draft','confirmed'])]}"
+                           options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="requisition_type"/>
+                        <field name="serial_no"/>
+                        <field name="id" visible="1"/>
+                        <field name="title"/>
+                        <field name="date"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Product">
+                            <field name="oc_requisition_line_ids">
+                                <tree editable="top">
+                                    <field name="product_id"/>
+                                    <field name="type"/>
+                                    <field name="partner_id"/>
+                                    <field name="location"/>
+                                    <field name="cs_number"/>
+                                    <field name="branch_code"/>
+                                    <field name="status"/>
+                                    <field name="ref"/>
+                                    <field name="quantity"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_oc_requisition_slip" model="ir.actions.act_window">
+        <field name="name">Requisition Slip</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oc.requisition</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Requisition Slip
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Requisition"
+              id="menu_requisition"
+              sequence="5" parent="helpdesk.helpdesk_ticket_menu_main"/>
+
+    <menuitem name="Slip" action="action_oc_requisition_slip"
+              id="menu_action_oc_requisition_slip"
+              parent="menu_requisition" sequence="31"/>
+</odoo>

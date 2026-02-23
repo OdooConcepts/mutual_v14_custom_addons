@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_partner_form_inherited_custom" model="ir.ui.view">
+        <field name="name">res.partner.inherit.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+             <field name="vat" position="after">
+                 <br/>
+                  <field name="is_technician" placeholder="CS Number"/>
+             </field>
+            <field name="name" position="after">
+
+                <!--  TASK # 01-->
+                <br/>
+                <field name="cs_number" placeholder="CS Number"/>
+                <br/>
+                <field name="branch_code" placeholder="Branch Code"/>
+                <br/>
+                <field name="bank_code" placeholder="Bank Code"/>
+                <br/>
+                <field name="uplink_date" placeholder="Uplink Date"/>
+            </field>
+
+            <!--  TASK # 04-->
+            <field name='category_id' position="after">
+                <field name="ptcl1"/>
+                <field name="ptcl2"/>
+                <field name="ntn"/>
+                <field name="strn"/>
+            </field>
+            <field name='country_id' position="after">
+                <field name="region"/>
+            </field>
+
+            <!--     branch detail options TASK # 03-->
+            <group>
+                <xpath expr='//form/sheet/group' position="after">
+                    <br/>
+                    <separator string="Branch Details"/>
+                    <div style="width:100%;">
+                        <label for="guard_less_branch" string="Guard Less Branch"/>
+                        <field name="guard_less_branch" widget="radio" class="oe_inline"/>
+                        <label for="locker_available" string="locker Available"/>
+                        <field name="locker_available" widget="radio" class="oe_inline"/>
+                        <label for="saturday_open" string="Saturday Open"/>
+                        <field name="saturday_open" widget="radio" class="oe_inline"/>
+                    </div>
+                </xpath>
+            </group>
+
+        </field>
+    </record>
+
+</odoo>

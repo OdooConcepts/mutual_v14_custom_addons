@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Report definition for Customer Inventory -->
+        <report
+            id="action_report_customer_inventory"
+            model="wiz.customer.inventory"
+            string="Stock Report"
+            report_type="qweb-pdf"
+            name="mutual_project.report_customer_inventory"
+            file="mutual_project.report_customer_inventory"
+            menu="False"
+        />
+
+        <!-- Report definition for Technician Time In/Out -->
+        <report
+            id="action_report_technician_timeinout"
+            model="technician.report"
+            string="Technician Time In/Out"
+            report_type="qweb-pdf"
+            name="mutual_project.technician_report_pdf"
+            file="mutual_project.technician_report_pdf"
+            menu="False"
+        />
+    </data>
+</odoo>

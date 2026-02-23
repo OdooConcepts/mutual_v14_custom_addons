@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <menuitem name="Reports" id="reports_side_top_menu" parent="account.menu_finance" sequence="5"/>
+         <menuitem
+            name="Recovery Report"
+            action="action_wiz_recovery_report_form"
+            id="menu_action_wiz_recovery_report_form"
+            sequence="4"
+            parent="reports_side_top_menu">
+         </menuitem>
+
+        <menuitem
+            name="Write-Off Invoices"
+            action="action_wiz_invoices_writeoff"
+            id="menu_action_wiz_invoices_writeoff"
+            sequence="4"
+            parent="reports_side_top_menu">
+         </menuitem>
+    </data>
+</odoo>

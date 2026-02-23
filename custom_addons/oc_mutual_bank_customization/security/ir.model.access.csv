@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+complaint_title_access,complaint_access,model_oc_complaint_title,helpdesk.group_helpdesk_user,1,1,1,1
+complaint_timesheet_access,complaint_timesheet,model_complaint_timesheet,helpdesk.group_helpdesk_user,1,1,1,1
+ticket_remarks_access,ticket_remarks,model_ticket_remarks,helpdesk.group_helpdesk_user,1,1,1,1
+rso_battery_access,rso_battery,model_rso_battery,group_rso_low_battery,1,1,1,1
+oc_requisition_access,oc_requisition,model_oc_requisition,,1,1,1,1
+oc_requisition_line_access,oc_requisition_line,model_oc_requisition_line,,1,1,1,1
+inventory_report_wizard_access,inventory_report_wizard,model_inventory_report_wizard,,1,1,1,1
+
+
+

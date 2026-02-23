@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_print_voucher_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="oc_mutual_residential.mutual_header"/>
+
+                    <div class="article">
+                        <div class="page" style="font-weight:normal;">
+                            <div>
+                                <h1 align="center">
+                                    <t t-if="o.name">
+                                        <span t-field="o.name"/>
+                                    </t>
+                                </h1>
+                            </div>
+                            <table id="custom_voucher_print">
+                                <tr>
+                                    <td>
+                                        <strong>Description:</strong>
+                                        <span t-if="o.ref">
+                                            <span t-field="o.ref"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span t-if="o.date">
+                                            <strong>Date:</strong>
+                                            <span t-field="o.date"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <style>
+                                #custom_voucher_print {
+                                font-family: Arial, Helvetica, sans-serif;
+                                border-collapse: collapse;
+                                font-size:18px !important;
+                                width:100%;
+                                }
+                                #custom_voucher_print td{
+                                padding: 8px;
+                                }
+                                #custom_voucher {
+                                font-family: Arial, Helvetica, sans-serif;
+                                border-collapse: collapse;
+                                font-size:18px;
+                                width:100%;
+                                }
+
+                                #custom_voucher td, #custom_voucher th {
+                                border: 1px solid #ddd;
+                                padding: 8px;
+
+                                }
+                                #custom_voucher th {
+                                padding: 10px;
+                                text-align: right;
+                                color: black;
+                                }
+                            </style>
+                            <table id="custom_voucher">
+                                <thead>
+                                    <tr>
+                                        <th class="text-left">Account</th>
+                                        <th class="text-left">Partner</th>
+                                        <th class="text-left">Description</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="invoice_tbody">
+                                    <t t-set="credit_total" t-value="0"/>
+                                    <t t-set="debit_total" t-value="0"/>
+                                    <t t-foreach="o.line_ids" t-as="l">
+                                        <t t-set="credit_total" t-value="credit_total + l.credit"/>
+                                        <t t-set="debit_total" t-value="debit_total + l.debit"/>
+                                        <tr>
+                                            <td>
+                                                <span t-field="l.account_id"/>
+                                            </td>
+                                            <td>
+                                                <span t-if="l.partner_id">
+                                                    <span t-field="l.partner_id"/>
+                                                </span>
+                                            </td>
+                                             <td>
+                                                <span t-if="l.name">
+                                                    <span t-field="l.name"/>
+                                                </span>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-if="l.debit">
+                                                    <span t-field="l.debit"/>
+                                                </span>
+                                                <span t-if=" not l.debit">
+                                                    <span t-field="l.debit">0.0</span>
+                                                </span>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-if="l.credit">
+                                                    <span t-field="l.credit"/>
+                                                </span>
+                                                <span t-if=" not l.credit">
+                                                    <span t-field="l.credit">0.0</span>
+                                                </span>
+                                            </td>
+
+                                        </tr>
+                                    </t>
+
+
+                                    <tr>
+                                        <td colspan="3" style="font-weight:bold;" class="text-center">Total</td>
+                                        <td class="text-right">
+                                            <span>Rs.
+                                                <span t-esc="debit_total"/>
+                                            </span>
+                                        </td>
+                                        <td class="text-right">
+                                            <span>Rs.
+                                                <span t-esc="credit_total"/>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <t t-call="oc_mutual_residential.mutual_footer"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

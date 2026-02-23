@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_report_partner_balance_form" model="ir.ui.view">
+        <field name="name">partner.balance.report.form</field>
+        <field name="model">partner.balance.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Partner Balances Report">
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_print_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_report_partner_balance" model="ir.actions.act_window">
+        <field name="name">Partner Balances</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">partner.balance.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_report_partner_balance_form"/>
+        <field name="target">new</field>
+    </record>
+    <menuitem
+            name="Partner Balances"
+            action="action_report_partner_balance"
+            id="menu_partner_balance_report"
+            sequence="1"
+            parent="account_reports.account_reports_partners_reports_menu">
+    </menuitem>
+
+</odoo>

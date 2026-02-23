@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_data_migration,access.data.migration,model_data_migration,,1,1,1,1
+access_complaint_migration,access.complaint.migration,model_complaint_migration,,1,1,1,1
+access_sale_order_migration,access.sale.order.migration,model_sales_order_migration,,1,1,1,1
+access_sale_order_line_migration,access.sale.order.line.migration,model_sales_order_line_migration,,1,1,1,1
+access_attendance_migration,access.attendance.migration,model_attendance_migration,,1,1,1,1
+access_invoice_migration,access.invoice.migration,model_invoice_migration,,1,1,1,1
+access_invoice_lines_migration,access.invoice.lines.migration,model_invoice_lines_migration,,1,1,1,1

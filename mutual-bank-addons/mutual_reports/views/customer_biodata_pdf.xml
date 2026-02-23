@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="customer_biodata_pdf" inherit_id="web.external_layout_standard">
+            <xpath expr="//div[@class='page']" position="inside">
+                <div class="row">
+                    <div t-foreach="docs" t-as="customer_info">
+                        <div class="col-xs-12">
+                            <h3>Bank's Information</h3>
+                            <strong>Name: </strong><span t-field="customer_info.name"/><br/>
+                        </div>
+                        <div class="col-xs-3" t-if="customer_info.cs_number">
+                            <strong>CS Number</strong>
+                            <p t-field="customer_info.cs_number"/>
+                        </div>
+                        <div class="col-xs-3" t-if="customer_info.branch_code">
+                            <strong>Branch Code</strong>
+                            <p t-field="customer_info.branch_code"/>
+                        </div>
+                        <div class="col-xs-3" t-if="customer_info.street or customer_info.street2">
+                            <strong>Location</strong>
+                            <p t-if="customer_info.street" t-field="customer_info.street"/>
+                            <p t-if="customer_info.street2" t-field="customer_info.street2"/>
+                        </div>
+                        <div class="col-xs-3" t-if="customer_info.city">
+                            <strong>Region</strong>
+                            <p t-field="customer_info.city"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

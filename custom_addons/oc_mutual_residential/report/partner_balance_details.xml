@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_partner_balance_details">
+        <t t-call="web.html_container">
+            <t>
+                    <div class="page" style="font-family: Arial, Helvetica, sans-serif;">
+                        <h1 align="center">Partner Balances</h1>
+                        <br/>
+                        <h2>
+                            <span t-esc="forms_data.get('company_id')[1]"/>
+                        </h2>
+                        <h5>From
+                            <span t-esc="forms_data['date_from']"/>
+                            to
+                            <span t-esc="forms_data['date_to']"/>
+                        </h5>
+                        <t t-set="debit_total" t-value="0"/>
+                        <t t-set="credit_total" t-value="0"/>
+                        <t t-set="balance_total" t-value="0"/>
+                        <t t-set="initialbalance_total" t-value="0"/>
+                        <style>
+                            #custom_voucher {
+                            font-family: Arial, Helvetica, sans-serif;
+                            border-collapse: collapse;
+                            font-size:18px;
+                            width:100%;
+                            }
+                            #custom_voucher th, #custom_voucher td {
+                            padding-top: 10px;
+                            text-align: right;
+                            padding-bottom: 10px;
+                            }
+                            #custom_voucher tr, #custom_voucher th{
+                            border-bottom: 1px solid #ddd;
+                            }
+
+                            #custom {
+                            font-family: Arial, Helvetica, sans-serif;
+                            border-collapse: collapse;
+                            font-size:18px;
+                            width:100%;
+                            }
+                            #custom td {
+                            padding-top: 10px;
+                            text-align: left;
+                            padding-bottom: 10px;
+                            }
+                            #custom tr{
+                            border-bottom: 1px solid #ddd;
+                            }
+                        </style>
+                        <table id="custom_voucher">
+                            <thead>
+                                <tr>
+                                    <th class="text-right">CS</th>
+                                    <th class="text-left">Debit</th>
+                                    <th class="text-left">Credit</th>
+                                    <th class="text-left">Current Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="balance" t-as="l">
+                                    <td>
+                                        <span t-esc="l['cs_category']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="'{:,}'.format(round(l['debit']))"/>
+                                        <t t-set="debit_total" t-value="debit_total+l['debit']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="'{:,}'.format(round(l['credit']))"/>
+                                        <t t-set="credit_total" t-value="credit_total+l['credit']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="'{:,}'.format(round(l['balance']))"/>
+                                        <t t-set="balance_total" t-value="balance_total+l['balance']"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <span>
+                                            <b>Total:</b>
+                                            <span t-esc="'{:,}'.format(round(debit_total))"/>
+                                            Rs.
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            <b>Total:</b>
+                                            <span t-esc="'{:,}'.format(round(credit_total))"/>
+                                            Rs.
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            <b>Total:</b>
+                                            <span t-esc="'{:,}'.format(round(balance_total))"/>
+                                            Rs.
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table id="custom">
+                            <!--                                initial balace calculation-->
+                            <t t-foreach="form" t-as="o">
+                                <tr>
+                                    <td colspan="5">
+                                        <span>
+                                            <b>Initial Balance:</b>
+                                            <span t-esc="'{:,}'.format(round(o['initialbalance']))"/>
+                                            Rs.
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        <span>
+                                            <b>Total Balance:</b>
+                                            <span t-esc="'{:,}'.format(round(o['initialbalance']+ balance_total))"/>
+                                            Rs.
+                                        </span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+            </t>
+        </t>
+    </template>
+</odoo>

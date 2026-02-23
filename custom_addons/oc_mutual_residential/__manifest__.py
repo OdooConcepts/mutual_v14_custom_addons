@@ -1,0 +1,50 @@
+{
+    'name': 'Oc Mutual Residential',
+    'version': '1.1',
+    'summary': '',
+    'sequence': 10,
+    'description': """
+    """,
+    'category': '',
+    'website': '',
+    'images': [],
+    'depends': ['web', 'base', 'account', 'sale_subscription', 'project', 'hr_timesheet', 'helpdesk',
+                'oc_ufone_sms_api_integration'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/data.xml',
+        'report/print_voucher.xml',
+        'report/report_financial_inherit.xml',
+        'report/mutual_header_footer.xml',
+        'report/custom_invoice.xml',
+        'report/custom_mspl_invoice.xml',
+        'report/report_acknowledgment_receipt.xml',
+        'report/report_issue_pdf.xml',
+        'report/report_history_pdf.xml',
+        'report/customer_address.xml',
+        'report/custom_template.xml',
+        'report/custom_quotation.xml',
+        'report/custom_additional_quotation.xml',
+        'wizard/partner_balances_wizard_view.xml',
+        'wizard/sales_summary_wizard_view.xml',
+        'report/report_sales_summary.xml',
+        'report/mutual_reports_reports.xml',
+        'report/partner_balance_details.xml',
+        'report/sale_report_inherit.xml',
+        'views/invoice_document.xml',
+        'views/customers.xml',
+        'views/account_invoice.xml',
+        'views/sale_subscription.xml',
+        'views/helpdesk.xml',
+    ],
+    'demo': [
+
+    ],
+    'qweb': [
+
+    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+
+}

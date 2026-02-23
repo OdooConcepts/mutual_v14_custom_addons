@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_report_inventory_form" model="ir.ui.view">
+        <field name="name">inventory.report.form</field>
+        <field name="model">inventory.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Inventory Report">
+                <group>
+                    <group>
+                        <field name="inventory_for"/>
+                        <field name="partner_id" attrs="{'invisible': [('inventory_for','in',('technician', False))],
+                        'required': [('inventory_for','=',('customer'))]}"/>
+                        <field name="search_criteria" attrs="{'invisible': [('inventory_for','in',('customer', False))],
+                        'required': [('inventory_for','in',('technician'))]}"/>
+                        <field name="technician_id" widget="many2many_tags" attrs="{'invisible': [('search_criteria','in',('all', False))],
+                        'required': [('search_criteria','in',('specific'))]}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_print_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_form_wiz_inventory" model="ir.actions.act_window">
+        <field name="name">Inventory Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">inventory.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_report_inventory_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+            name="Inventory Reports"
+            action="action_form_wiz_inventory"
+            id="menu_customer_inventory_project_attachment_view"
+            parent="menu_miscellaneous" sequence="33">
+    </menuitem>
+</odoo>

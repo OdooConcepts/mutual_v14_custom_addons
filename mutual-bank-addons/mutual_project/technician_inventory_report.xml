@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_technician_inventory" model="ir.actions.report">
+        <field name="name">Stock Report</field>
+        <field name="model">wiz.technician.inventory</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mutual_project.report_technician_inventory</field>
+        <field name="report_file">mutual_project.report_technician_inventory</field>
+        <field name="print_report_name">'Technician Stock Report - %s' % (object.name)</field>
+    </record>
+</odoo>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_customer_inventory">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <h2>Customer Stock Report</h2><br/>
+                            <div style="font-size:12px;width:550px;display:inline-block;">
+                                <div style="border:2px solid grey; padding:10px;border-radius:10px;">
+                                    <strong style="font-size:18px">Customer's Information:</strong><br/>
+                                    <span t-field="doc.partner_id.name"/><br/>
+                                    <span t-if="doc.partner_id.bank_code">
+                                        <span t-field="doc.partner_id.bank_code"/><br/>
+                                    </span>
+                                    <span t-if="doc.partner_id.branch_code">
+                                        <span t-field="doc.partner_id.branch_code"/><br/>
+                                    </span>
+                                    <span t-if="doc.partner_id.cs_number">
+                                        <span t-field="doc.partner_id.cs_number"/><br/>
+                                    </span>
+                                    <span t-if="doc.partner_id.street">
+                                        <span t-field="doc.partner_id.street"/><br/>
+                                    </span>
+                                    <span t-if="doc.partner_id.street2">
+                                        <span t-field="doc.partner_id.street2"/><br/>
+                                    </span>
+                                    <span t-if="doc.partner_id.city">
+                                        <span t-field="doc.partner_id.city"/><br/>
+                                    </span>
+                                </div>
+                            </div>
+                            <table class="table table-condensed" style="font-size:14px">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Sale Order</th>
+                                        <th>Product</th>
+                                        <th class="text-right">Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="invoice_tbody">
+                                    <tr t-foreach="doc.fetch_record()" t-as="item">
+                                        <td>
+                                            <span t-esc="item['date']" t-field-options="{'format': 'dd-MM-YYYY'}"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="item['status'] == 'Stock Returned from Customer To Warehouse'">
+                                                <span t-esc="item['status']"/>
+                                            </t>
+                                            <t t-elif="item['status'] == 'Stock Returned from Customer To Technician'">
+                                                <span t-esc="item['status']"/>
+                                            </t>
+                                            <t t-elif="item['status'] == 'Stock Returned from Technician To Warehouse'">
+                                                <span t-esc="item['status']"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="item['origin']"/>
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span t-esc="item['name']"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-if="item['status'] in ['Stock Returned from Customer To Warehouse', 'Stock Returned from Customer To Technician', 'Stock Returned from Technician To Warehouse']">
+                                                -<span t-esc="item['product_qty']"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="item['product_qty']"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

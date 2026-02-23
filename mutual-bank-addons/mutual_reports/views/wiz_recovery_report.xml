@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="wiz_recovery_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.internal_layout">
+                        <t t-set="total_pending_invoices" t-value="0"/>
+                        <t t-set="total_pending_invoices_amount" t-value="0"/>
+                        <t t-set="total_received_invoices" t-value="0"/>
+                        <t t-set="total_received_invoices_amount" t-value="0"/>
+                        <div class="page">
+                            <h2>Analysis of Invoices</h2><br/>
+                            <h3>Pending Invoices</h3>
+                            <table class="table table-condensed" style="font-size:14px">
+                                <thead>
+                                    <tr>
+                                        <th>S.no.</th>
+                                        <th>Bank</th>
+                                        <th>Number of Invoice(s)</th>
+                                        <th class="text-right">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="doc.pending_invoices()" t-as="l">
+                                        <td><span t-esc="l_index+1"/></td>
+                                        <td><span t-esc="l['bank_code']"/></td>
+                                        <td><span t-esc="l['invoices_total']"/></td>
+                                        <td class="text-right"><span t-esc="round(l['amount_total'])"/></td>
+                                        <t t-set="total_pending_invoices" t-value="total_pending_invoices+l['invoices_total']"/>
+                                        <t t-set="total_pending_invoices_amount" t-value="total_pending_invoices_amount+l['amount_total']"/>
+                                    </tr>
+                                    <tr>
+                                        <th>Grand Total</th>
+                                        <th></th>
+                                        <th><span t-esc="total_pending_invoices"/></th>
+                                        <th class="text-right"><span t-esc="total_pending_invoices_amount"/></th>
+                                    </tr>
+                                </tbody>
+                            </table><br/>
+                            <h3>Received Invoices</h3>
+                            <table class="table table-condensed" style="font-size:14px">
+                                <thead>
+                                    <tr>
+                                        <th>S.no.</th>
+                                        <th>Bank</th>
+                                        <th>Number of Invoice(s)</th>
+                                        <th class="text-right">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="doc.received_invoices()" t-as="l">
+                                        <td><span t-esc="l_index+1"/></td>
+                                        <td><span t-esc="l['bank_code']"/></td>
+                                        <td><span t-esc="l['invoices_total']"/></td>
+                                        <td class="text-right"><span t-esc="round(l['amount_total'])"/></td>
+                                        <t t-set="total_received_invoices" t-value="total_received_invoices+l['invoices_total']"/>
+                                        <t t-set="total_received_invoices_amount" t-value="total_received_invoices_amount+l['amount_total']"/>
+                                    </tr>
+                                    <tr>
+                                        <th>Grand Total</th>
+                                        <th></th>
+                                        <th><span t-esc="total_received_invoices"/></th>
+                                        <th class="text-right"><span t-esc="total_received_invoices_amount"/></th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

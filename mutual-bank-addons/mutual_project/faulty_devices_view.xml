@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action definition for Faulty Sheet -->
+        <record id="action_faulty_sheet" model="ir.actions.act_window">
+            <field name="name">Faulty Sheet</field>
+            <field name="res_model">faulty.devices</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No data yet!
+                </p>
+                <p>
+                    Create a new record
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu item for Faulty Sheet -->
+        <menuitem
+                name="Faulty Sheet"
+                id="menu_faulty_sheet"
+                sequence="50"
+                parent="menu_misc_operations"
+                action="action_faulty_sheet"
+        />
+
+        <!-- View definition for Faulty Devices form -->
+        <record id="faulty_sheet_form_view" model="ir.ui.view">
+            <field name="name">faulty_sheet.form.view</field>
+            <field name="model">faulty.devices</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Faulty Devices Sheet">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id" options="{'limit': 0, 'create': false, 'create_edit': false}" />
+                                <field name="cs_number"/>
+                                <field name="branch_code"/>
+                                <field name="bank_code"/>
+                                <field name="monitoring_address"/>
+                                <field name="city"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="status"/>
+                                <field name="devices_received"/>
+                                <field name="devices_received_qty"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Products">
+                                <field name="product_lines" colspan="4" nolabel="1">
+                                    <tree editable="top" string="Items">
+                                        <field name="products" required="True"/>
+                                        <field name="quantity" required="True"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- View definition for Faulty Devices tree view -->
+        <record id="faulty_sheet_tree_view" model="ir.ui.view">
+            <field name="name">faulty_sheet.tree.view</field>
+            <field name="model">faulty.devices</field>
+            <field name="arch" type="xml">
+                <tree string="Faulty Sheet">
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="bank_code"/>
+                    <field name="cs_number"/>
+                    <field name="monitoring_address"/>
+                    <field name="devices"/>
+                    <field name="qty"/>
+                    <field name="devices_received"/>
+                    <field name="devices_received_qty"/>
+                    <field name="city"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- View definition for Faulty Devices search view -->
+        <record id="faulty_sheet_search_view" model="ir.ui.view">
+            <field name="name">faulty_sheet.search.view</field>
+            <field name="model">faulty.devices</field>
+            <field name="arch" type="xml">
+                <search string="Courier Sheet">
+                    <field name="cs_number"/>
+                    <field name="branch_code"/>
+                    <field name="bank_code"/>
+                    <field name="date"/>
+                    <field name="status"/>
+                    <field name="city"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

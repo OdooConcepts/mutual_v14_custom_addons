@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+force_details_access,force_details_access,model_force_details,mutual_force.group_force_user,1,1,1,1
+guard_details_access,guard_details_access,model_guard_details,mutual_force.group_force_user,1,1,1,1
+bank_customers_access,bank_customers_access,model_bank_customers,mutual_force.group_force_user,1,1,1,1
+response_time_access,response_time_access,model_response_time,mutual_force.group_force_user,1,1,1,1
+new_visits_access,new_visits_access,model_new_visits,mutual_force.group_force_user,1,1,1,1
+new_visits_stages_access,new_visits_stages_access,model_new_visits_stages,mutual_force.group_force_user,1,1,1,1
+recovery_visits_access,recovery_visits_access,model_recovery_visits,mutual_force.group_force_user,1,1,1,1
+
+
+
+

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_Invoice_inherited_form" model="ir.ui.view">
+        <field name="name">account.move.inherit.custom.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_reference']" position="after">
+                <field name="cs_number" invisible="1"/>
+                <field name="print_with_letter_header"/>
+                <field name="address_criteria"/>
+                <field name="show_outstanding"/>
+            </xpath>
+            <xpath expr="//field[@name='invoice_date']" position="after">
+                <label for="monitoring_period_from" string="Monitoring Period"/>
+                <div class="oe_inline">
+                    <field name="monitoring_period_from" class="oe_inline"/>
+                    <span></span>
+                    <span style="padding-left:2px;padding-right:2px;">to</span>
+                    <span></span>
+                    <field name="monitoring_period_to" class="oe_inline"/>
+                </div>
+            </xpath>
+            <xpath expr="//page[@name='other_info']" position="after">
+                <page name="payment_follow_up" string="Payments Follow Up">
+                    <group>
+                        <group string="Responsible" name="active_responsible">
+                            <field name="follow_up_responsible"/>
+                            <field name="assign_rider"/>
+                            <field name="assign_rider_date" string="Date of Assigning"/>
+                        </group>
+                        <group name="payment_group">
+                            <field name="payment_received"/>
+                            <field name="payment_received_date" string="Date of Receiving" attrs="{'invisible': [('payment_received', '=',False)],'required': [('payment_received','=', True)]}"/>
+                            <field name="payment_methods"/>
+                            <field name="cheque_number"
+                                   attrs="{'invisible': [('payment_methods', '!=','cheque')],'required': [('payment_methods','=', 'cheque')]}"/>
+                            <field name="payment_amount"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="Invoice_line_inherited" model="ir.ui.view">
+        <field name="name">account.move.line.inherit.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='invoice_partner_display_name']" position="after">
+                <field name="cs_number"/>
+                <field name="follow_up_responsible"/>
+                <field name="assign_rider"/>
+                <field name="payment_received"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="sale_order_inherited_form" model="ir.ui.view">
+        <field name="name">sale.order.inherit.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="sales_type"/>
+                <field name="print_with_letter_header"/>
+                <field name="cs_number"/>
+                <field name="payment_received"/>
+                <field name="terms_conditions"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="sale_order_tree_inherited_form" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="sales_type"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="company_inherited_form" model="ir.ui.view">
+        <field name="name">company.inherit.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="old_system_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="fiscal_position_inherited_form" model="ir.ui.view">
+        <field name="name">fiscal.position.inherit.form</field>
+        <field name="model">account.fiscal.position</field>
+        <field name="inherit_id" ref="account.view_account_position_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="old_system_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="fiscal_year_inherited_form" model="ir.ui.view">
+        <field name="name">fiscal.year.inherit.form</field>
+        <field name="model">account.fiscal.year</field>
+        <field name="inherit_id" ref="account_accountant.action_account_fiscal_year_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="old_system_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="journal_inherited_form" model="ir.ui.view">
+        <field name="name">journal.inherit.form</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="old_system_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="account_head_inherited_form" model="ir.ui.view">
+        <field name="name">account.head.inherit.form</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group/group[@name='left_main_group']/field[@name='group_id']" position="after">
+                <field name="old_system_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

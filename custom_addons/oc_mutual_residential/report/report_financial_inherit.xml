@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="filter_info_template_inherited" inherit_id="account_reports.filter_info_template">
+            <xpath expr="//t[@t-esc='partner_name']" position="before">
+                <t t-set="partner_cs_number" t-value="options['selected_partner_cs_number']"/>
+
+                [<t t-esc="partner_cs_number[0]" style="margin-right:3px;"/>]
+            </xpath>
+        </template>
+    </data>
+</odoo>

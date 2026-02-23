@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_customer">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h5>Customer Information</h5>
+                    <pre><h6>Name:________________________________________________________________________________</h6></pre>
+                    <pre><h6>Complete Branch Address With Nearest Location:  _____________________________________</h6>
+                     ______________________________________________________________________________________________________</pre>
+                   <pre><h6>Branch Code: _______________            Bank Code:  _______________</h6></pre>
+                     <div>
+                    <h5>Branch PTCL / Officials Phone List</h5>
+                         <pre><h6>Branch PTCL: 1. _____________________ 2. _____________________ 3. _____________________ </h6></pre>
+                         <pre><h6>Branch PABX: 1. _____________________ 2. _____________________ 3. _____________________ </h6></pre>
+                         <pre><h6>Name: ___________________  Number: ___________________  Designation: __________________   SMS Alert    <input type="checkbox"/> </h6></pre>
+                         <pre><h6>Name: ___________________  Number: ___________________  Designation: __________________   SMS Alert    <input type="checkbox"/> </h6></pre>
+                         <pre><h6>Name: ___________________  Number: ___________________  Designation: __________________   SMS Alert    <input type="checkbox"/> </h6></pre>
+                </div>
+                    <div>
+                        <h5>Branch Details</h5>
+                        <pre><h6>Guard Less Branch:  YES     NO      Locker Available:    YES     NO      Saturday Open:   YES     NO</h6></pre>
+                        <label><b>Note:</b> if Guards stay in branch premises during night, please provide contact number as per below details.</label>
+                        <pre><h6>Guard Name: ____________________  Number: ________________  Security Co: ______________________ </h6></pre>
+                        <pre><h6>Nearest Police Station No: _________________           Nearest Fire Station No: _________________ </h6></pre>
+                    </div>
+                    <div>
+                        <h5>Secret Question For Authentication:</h5>
+                         <pre><label>Example:  Question: Is Mr.Ali in??  Answer:Chair  Danger:Outside</label></pre>
+                         <pre><h6>Question: ___________________________________  Normal Ans: ___________________  Danger: __________________ </h6></pre>
+                        <label><b>Note: if anyone transfer, resign, retired or going on leave please inform us for better security.Please dispatch this
+                        form dully signed / stamped by authorized person,. with courier(Mutual Security System, 202 Progressive Building Shahra-e-Faisal Nursery Karachi) / By E-Mail (hassan.ali@mutualsecurity.net) or By Fax(021-34547139)</b></label>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</openerp>    

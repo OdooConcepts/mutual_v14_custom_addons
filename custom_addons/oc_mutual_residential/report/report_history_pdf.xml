@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+        <template id="report_history_pdf_document">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <t t-set="address">
+                    <div>
+                        <h4>Customer's Information:</h4>
+                        <span t-field="o.partner_id"/>
+                        <br/>
+                        <p t-field="o.partner_id.street"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id.mobile">
+                            <strong>Mobile:</strong>
+                            <p t-field="o.partner_id.mobile"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id.mobile">
+                            <strong>Phone:</strong>
+                            <p t-field="o.partner_id.phone"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id.cs_number">
+                            <strong>CS Number:</strong>
+                            <p t-field="o.partner_id.cs_number"/>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+                <div class="page">
+                    <div class="row mt32 mb32">
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.id">
+                            <strong>Complaint ID:</strong>
+                            <p t-field="o.id"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.priority">
+                            <strong>Priority:</strong>
+                            <p t-field="o.priority"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong>Logged by</strong>
+                            <!--<p t-field="o.responsibleperson"/>-->
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.create_date">
+                            <strong>Logged date</strong>
+                            <p t-field="o.create_date"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <table class="table table-sm table-condensed">
+                        <thead>
+                            <tr class="border-black">
+                                <th>Complaint Type</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <tr>
+                                <td>
+                                    <span t-field="o.name"/>
+                                </td>
+                            </tr>
+                            <tr t-foreach="o.other_complaint" t-as="compType">
+                                <td>
+                                    <span t-field="compType.complaint_title"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table o_main_table">
+                        <thead>
+                            <tr class="border-black">
+                                <th>Technician Name</th>
+                                <th>Remarks</th>
+                                <th>Time In</th>
+                                <th>Time Out</th>
+                                <th>Total Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.time_ids" t-as="l">
+                                <td>
+                                    <t t-foreach="l.technician_ids" t-as="t">
+                                        <span t-field="t.name"/>
+                                    </t>
+                                </td>
+                                <td>
+                                    <span t-field="l.name"/>
+                                </td>
+                                <td>
+                                    <span t-esc="round(l.time_in,2)"/>
+                                </td>
+                                <td>
+                                    <span t-esc="round(l.time_out,2)"/>
+                                </td>
+                                 <td>
+                                    <span t-esc="round(l.total_time,2)"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </t>
+        </template>
+        <template id="report_history_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-call="oc_mutual_residential.report_history_pdf_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</openerp>
