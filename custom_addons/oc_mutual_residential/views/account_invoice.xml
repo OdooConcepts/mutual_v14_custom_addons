@@ -26,6 +26,7 @@
                     <group>
                         <group string="Responsible" name="active_responsible">
                             <field name="follow_up_responsible"/>
+                            <field name="follow_up_date"/>
                             <field name="assign_rider"/>
                             <field name="assign_rider_date" string="Date of Assigning"/>
                         </group>

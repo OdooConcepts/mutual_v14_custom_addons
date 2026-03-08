@@ -54,6 +54,10 @@
                 <label for="other_complaint">Other Complaints</label>
                 <field name="other_complaint" widget="many2many_tags"/>
                 <br/>
+                <field name="is_disco" invisible="1"/>
+                <label for="reason_of_disco" attrs="{'invisible': [('is_disco', '=', False)],'required': [('is_disco', '=', True)]}">Reason of Disconnection</label>
+                <field name="reason_of_disco" attrs="{'invisible': [('is_disco', '=', False)], 'required': [('is_disco', '=', True)]}"/>
+                <br/>
             </xpath>
             <xpath expr="//field[@name='name']" position="attributes">
                 <attribute name="attrs">{'invisible': True}</attribute>
@@ -129,6 +133,9 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_id']" position="attributes">
                 <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+             <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="create_date"/>
             </xpath>
         </field>
     </record>

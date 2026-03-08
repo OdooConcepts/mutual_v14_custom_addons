@@ -78,6 +78,7 @@ class AccountInvoice(models.Model):
     monitoring_period_from = fields.Date(tracking=True)
     monitoring_period_to = fields.Date(tracking=True)
     follow_up_responsible = fields.Many2one('hr.employee', 'Follow up Responsible', tracking=True)
+    follow_up_date = fields.Date(string='Follow up Date', tracking=True)
     assign_rider = fields.Many2one('hr.employee', 'Assign Rider', tracking=True)
     payment_received = fields.Boolean('Payment Received', tracking=True)
     payment_methods = fields.Selection([('online', 'Online'), ('cash', 'Cash'), ('cheque', 'Cheque')])

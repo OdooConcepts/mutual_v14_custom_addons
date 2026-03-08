@@ -28,6 +28,31 @@ class inheritHelpdeskTicket(models.Model):
     end_date = fields.Date(string='End Date')
     is_period_change = fields.Selection([('yes','Yes'),('no','No')], string='Is monitoring period change?')
     reco_remarks = fields.Text(string='Reconnection Remarks')
+    reason_of_disco = fields.Selection([
+        ('no_need', 'NO NEED'),
+        ('non_payment', 'NON PAYMENT'),
+        ('house_sold_out', 'HOUSE SOLD OUT'),
+        ('location_closed_permanently', 'LOCATION CLOSED PERMANENTLY'),
+        ('new_owner_no_service', "NEW OWNER DON'T WANT OUR SERVICE"),
+        ('tenant_no_service', "TENANT DON'T WANT OUR SERVICE"),
+        ('customer_shift_abroad', 'CUSTOMER SHIFT ABROAD'),
+        ('society_security_guard', 'SOCIETY ARRANGE SECURITY GUARD'),
+        ('not_satisfied_service', 'NOT SATISFIED OUR SERVICE'),
+        ('complaint_issue', 'COMPLAINT ISSUE'),
+        ('system_hold', 'SYSTEM HOLD'),
+        ('high_rate_not_affordable', 'HIGH RATE / NOT AFFORDABLE'),
+        ('customer_shift_apartment', 'CUSTOMER SHIFT IN APPARTMENT'),
+        ('house_demolish', 'HOUSE DEMOLISH'),
+        ('system_not_available', 'SYSTEM NOT AVAILABLE'),
+    ], string="Reason of Disconnection", tracking=True)
+    is_disco = fields.Boolean('Is Disco?')
+
+    @api.onchange('complaint_title')
+    def set_is_disco(self):
+        for rec in self:
+            if rec.complaint_title:
+                if rec.complaint_title.complaint_title in ['Disco','V/S DISCONNECT REQUIRED']:
+                    rec.write({'is_disco':True})
 
     def do_active_customer(self, partner_id):
         self.env.cr.execute("""update res_partner set active=True where id=%s"""%(partner_id))
