@@ -222,7 +222,7 @@
                                             <td>
                                                 <span>
                                                     <t t-if="l.product_id.name.find('Service')!=-1">
-                                                         Burglar Alarm Monitoring Fee for the period
+                                                        Burglar Alarm Monitoring Fee for the period
                                                     </t>
                                                     <t t-if="l.product_id.name.find('Subscription')!=-1">
                                                         SMS subscription charges for the period
@@ -335,12 +335,18 @@
                                                         <strong>
                                                             <span style="margin-right:3px;">Rs.</span>
                                                             <t t-if="o.show_outstanding">
-                                                                 <span style="margin-right:5px;" class="text-nowrap"
-                                                                  t-esc="'%.2f'% round(outstanding_amount+o.amount_total)"/>
+                                                                <t t-if="o.payment_state=='not_paid'">
+                                                                    <span style="margin-right:5px;" class="text-nowrap"
+                                                                          t-esc="'%.2f'% round(outstanding_amount+o.amount_total)"/>
+                                                                </t>
+                                                                <t t-if="o.payment_state!='not_paid'">
+                                                                    <span style="margin-right:5px;" class="text-nowrap"
+                                                                          t-esc="'%.2f'% round(o.amount_total)"/>
+                                                                </t>
                                                             </t>
                                                             <t t-if="not o.show_outstanding">
-                                                                 <span style="margin-right:5px;" class="text-nowrap"
-                                                                  t-esc="'%.2f'% round(o.amount_total)"/>
+                                                                <span style="margin-right:5px;" class="text-nowrap"
+                                                                      t-esc="'%.2f'% round(o.amount_total)"/>
                                                             </t>
 
                                                         </strong>

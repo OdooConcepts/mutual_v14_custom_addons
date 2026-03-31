@@ -36,31 +36,48 @@
             </div>
         </template>
         <template id="mutual_footer">
-             <t t-raw="0"/>
+            <t t-raw="0"/>
             <div t-if="o.print_with_letter_header" class="footer">
                 <div style="font-size:16px;max-width:100%; width:100%;">
-                        <span style="font-size:16px; float:left;">
-                            <small>
-                                <em>
-                                    <span t-field="o.create_date"/>
+                    <span style="font-size:16px; float:left;">
+                        <small>
+                            <em>
+                                <span>Created By:</span>
+                                <t t-if="o.create_uid.name=='OdooBot'">
                                     Administrator
-                                    <!--<span t-field="o.create_uid"/>-->
-                                </em>
-                            </small>
-                        </span>
-                        <span style="font-size:16px; float:right;">
-                            <t t-if="user.env.company.name == 'Mutual Security Systems'">
-                                Mutual Security Systems
-                            </t>
-                            <t t-if="user.env.company.name == 'Mutual Security'">
-                                Mutual Security Systems Pvt. Ltd.
-                            </t>
-                            <t t-if="user.env.company.name == 'Mutual Security Systems Pvt. Ltd.'">
-                                Mutual Security Systems Pvt. Ltd.
-                            </t>
-                        </span>
-                    </div>
+                                </t>
+                                <t t-if="o.create_uid.name!='OdooBot'">
+                                    <span t-field="o.create_uid"/>
+                                </t>
+                                <span t-field="o.create_date"/>
+                                <!--                                    Administrator-->
+                            </em>
+                        </small>
+                    </span>
                     <br/>
+                    <span style="font-size:16px; float:left;">
+                        <small>
+                            <em>
+                                <span>Printed By:</span>
+                                <span t-esc="user.name"/>
+                               <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %I:%M:%S %p')"/>
+                            </em>
+                        </small>
+                    </span>
+
+                    <span style="font-size:16px; float:right;">
+                        <t t-if="user.env.company.name == 'Mutual Security Systems'">
+                            Mutual Security Systems
+                        </t>
+                        <t t-if="user.env.company.name == 'Mutual Security'">
+                            Mutual Security Systems Pvt. Ltd.
+                        </t>
+                        <t t-if="user.env.company.name == 'Mutual Security Systems Pvt. Ltd.'">
+                            Mutual Security Systems Pvt. Ltd.
+                        </t>
+                    </span>
+                </div>
+                <br/>
                 <div style="max-width:100%; width:100%; border-top:1px solid black; text-align:center !important;">
                     <center>
                         <p>
