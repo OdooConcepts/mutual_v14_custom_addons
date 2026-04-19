@@ -279,7 +279,7 @@
                                                 </span>
                                             </td>
                                         </tr>
-                                        <t t-if="o.payment_state=='not_paid'">
+                                        <t t-if="o.payment_state in ['not_paid','partial']">
                                             <t t-if="o.show_outstanding">
                                                 <t t-if="outstanding_amount &gt; 0.0">
                                                     <tr>
@@ -335,11 +335,11 @@
                                                         <strong>
                                                             <span style="margin-right:3px;">Rs.</span>
                                                             <t t-if="o.show_outstanding">
-                                                                <t t-if="o.payment_state=='not_paid'">
+                                                                <t t-if="o.payment_state in ['not_paid','partial']">
                                                                     <span style="margin-right:5px;" class="text-nowrap"
                                                                           t-esc="'%.2f'% round(outstanding_amount+o.amount_total)"/>
                                                                 </t>
-                                                                <t t-if="o.payment_state!='not_paid'">
+                                                                <t t-if="o.payment_state not in ['not_paid','partial']">
                                                                     <span style="margin-right:5px;" class="text-nowrap"
                                                                           t-esc="'%.2f'% round(o.amount_total)"/>
                                                                 </t>
