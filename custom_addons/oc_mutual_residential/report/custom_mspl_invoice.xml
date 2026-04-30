@@ -139,6 +139,18 @@
                                                         </t>
                                                     </tr>
                                                 </t>
+                                                <t t-if="o.partner_id.company_id.name=='Mutual Security Systems (SA)'">
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Our NTN</strong>
+                                                        </td>
+                                                        <t t-if="user.env.company.name == 'Mutual Security Systems (SA)'">
+                                                            <td>
+                                                                <span style="margin-left:13px;">3199118-1</span>
+                                                            </td>
+                                                        </t>
+                                                    </tr>
+                                                </t>
                                                 <t t-if="o.partner_id.company_id.name == 'Mutual Security Systems'">
                                                     <tr>
                                                         <td>
@@ -446,6 +458,19 @@
                                             <b>Account No.</b>110800067770001
                                             <br/>
                                             <b>IBAN No.</b>PK97BKIP0110800067770001
+                                            <br/>
+                                        </t>
+                                        <t t-if="o.company_id.name == 'Mutual Security Systems (SA)'">
+                                            <b>PLEASE MAKE ONLINE PAYMENT</b>
+                                            <b>(QUOTING ABOVE CUSTOMER ID) TO</b>
+                                            <br/>
+                                            <b>Bank:</b>BankIslami Pakistan Ltd.
+                                            <br/>
+                                            <b>For Mutual Security Systems (SA)</b>
+                                            <br/>
+                                            <b>Account No.</b>110800337660001
+                                            <br/>
+                                            <b>IBAN No.</b>PK97BKIP0110800337660001
                                             <br/>
                                         </t>
                                         <span>
