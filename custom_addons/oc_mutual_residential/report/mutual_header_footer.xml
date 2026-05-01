@@ -25,7 +25,7 @@
                                         Mutual Security Systems Pvt. Ltd.
                                     </t>
                                     <t t-if="o.partner_id.company_id.name == 'Mutual Security Systems (SA)'">
-                                        Mutual Security Systems (SA)
+                                        Mutual Security Systems
                                     </t>
                                 </span>
                             </div>
@@ -79,7 +79,7 @@
                             Mutual Security Systems Pvt. Ltd.
                         </t>
                          <t t-if="user.env.company.name == 'Mutual Security Systems (SA)'">
-                            Mutual Security Systems (SA)
+                            Mutual Security Systems
                         </t>
                     </span>
                 </div>
