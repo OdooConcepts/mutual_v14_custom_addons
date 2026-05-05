@@ -481,6 +481,9 @@
                                     <span>
                                         You may send your payees account cheque favouring '
                                         <span>
+                                            <t t-if="user.env.company.name == 'Mutual Security Systems (SA)'">
+                                                Mutual Security Systems
+                                            </t>
                                             <t t-if="user.env.company.name == 'Mutual Security Systems'">
                                                 Mutual Security Systems
                                             </t>
